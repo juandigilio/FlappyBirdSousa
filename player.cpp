@@ -12,3 +12,4 @@ void playerMovement(Player& player, int screenHeight)
 		player.pos.y += player.speed * GetFrameTime();
 	}
 }
+
