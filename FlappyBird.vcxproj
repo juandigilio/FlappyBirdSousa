@@ -103,9 +103,7 @@
       <AdditionalDependencies>raylib.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>cd "$(OutDir)"
-mkdir "assets"
-xcopy /s /e /y "$(SolutionDir)assets" "$(OutDir)assets"
+      <Command>
 
 </Command>
     </PreBuildEvent>

@@ -1,6 +1,6 @@
 #include "obstacles.h"
 
-void obstaclesMovement(Obstacles& topObstacles, Obstacles& bottomObstacles, int screenWidth, int screenHeight)
+void obstaclesMovement(Obstacles& topObstacles, Obstacles& bottomObstacles, int screenWidth, int screenHeight, int minObstacleHeight, int maxObstacleHeight)
 {
 	topObstacles.coolDown += GetFrameTime();
 
@@ -14,9 +14,9 @@ void obstaclesMovement(Obstacles& topObstacles, Obstacles& bottomObstacles, int 
 	{
 		topObstacles.pos.x = static_cast<float>(screenWidth);
 		topObstacles.coolDown = 0;
-		topObstacles.height = static_cast<int>(GetRandomValue(150, 400));
+		topObstacles.height = static_cast<int>(GetRandomValue(minObstacleHeight, maxObstacleHeight));
 		bottomObstacles.pos.x = static_cast<float>(screenWidth);
-		bottomObstacles.height = static_cast<int>(screenHeight - topObstacles.height - 120);
+		bottomObstacles.height = static_cast<int>(screenHeight - topObstacles.height - bottomObstacles.sepparation);
 		bottomObstacles.pos.y = static_cast<float>(screenHeight - bottomObstacles.height);
 	}
 }

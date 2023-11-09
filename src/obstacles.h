@@ -8,6 +8,7 @@ struct Obstacles
 	int height;
 	int width;
 	float coolDown;
+	int sepparation = 120;
 };
 
-void obstaclesMovement(Obstacles& topObstacle, Obstacles& bottomObstacles, int screenWidth, int screenHeight);
+void obstaclesMovement(Obstacles& topObstacle, Obstacles& bottomObstacles, int screenWidth, int screenHeight, int minObstacleHeight, int maxObstacleHeight);

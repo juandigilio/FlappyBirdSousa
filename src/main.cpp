@@ -8,6 +8,9 @@ void resetObstacle(Player player, Obstacles& topObstacles, Obstacles& bottomObst
 const int screenWidth = 1366;
 const int screenHeight = 768;
 
+const int minObstacleHeight = 50;
+const int maxObstacleHeight = 598;
+
 int main()
 {
     Player player;
@@ -22,12 +25,12 @@ int main()
     topObstacles.pos.y = 0;
     topObstacles.speed = 600;
     topObstacles.width = 40;
-    topObstacles.height = static_cast<int>(GetRandomValue(150, 200));
+    topObstacles.height = static_cast<int>(GetRandomValue(minObstacleHeight, maxObstacleHeight));
     topObstacles.coolDown = 0;
 
     Obstacles bottomObstacles;
     bottomObstacles.pos.x = screenWidth;
-    bottomObstacles.height = screenHeight - topObstacles.height - 120;
+    bottomObstacles.height = screenHeight - topObstacles.height - bottomObstacles.sepparation;
     bottomObstacles.pos.y = static_cast<float>(screenHeight - bottomObstacles.height);
     bottomObstacles.speed = 600;
     bottomObstacles.width = 40;
@@ -39,7 +42,7 @@ int main()
     {
         playerMovement(player, screenHeight);
 
-        obstaclesMovement(topObstacles, bottomObstacles, screenWidth, screenHeight);
+        obstaclesMovement(topObstacles, bottomObstacles, screenWidth, screenHeight, minObstacleHeight, maxObstacleHeight);
 
         resetObstacle(player, topObstacles, bottomObstacles);
 
@@ -78,9 +81,9 @@ void resetObstacle(Player player, Obstacles& topObstacles, Obstacles& bottomObst
     if (collision(player, topObstacles) || collision(player, bottomObstacles))
     {
         topObstacles.pos.x = screenWidth;
-        topObstacles.height = static_cast<int>(GetRandomValue(150, 400));
+        topObstacles.height = static_cast<int>(GetRandomValue(minObstacleHeight, maxObstacleHeight));
         bottomObstacles.pos.x = screenWidth;
-        bottomObstacles.height = static_cast<int>(screenHeight - topObstacles.height - 120);
+        bottomObstacles.height = static_cast<int>(screenHeight - topObstacles.height - bottomObstacles.sepparation);
         bottomObstacles.pos.y = static_cast<float>(screenHeight - bottomObstacles.height);
     }
 }
