@@ -1,5 +1,5 @@
 #pragma once
-#include "lib/raylib/raylib.h"
+#include "raylib/raylib.h"
 
 struct Player
 {
