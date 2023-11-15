@@ -1,15 +1,23 @@
 #include "player.h"
 
-void playerMovement(Player& player, int screenHeight)
+void playerMovement(Player& player)
 {
-	if (IsKeyDown(KEY_W) && player.pos.y > 0)
+	if (IsKeyDown(KEY_SPACE) && player.pos.y > 0)
 	{
-		player.pos.y -= player.speed * GetFrameTime();
+		player.velocity.y = player.jumpForce;
 	}
 
-	if (IsKeyDown(KEY_S) && player.pos.y < screenHeight - player.height)
+	player.velocity.y += player.gravity * GetFrameTime();
+	player.pos.y += player.velocity.y * GetFrameTime();
+
+	if (player.pos.y <= 0)
 	{
-		player.pos.y += player.speed * GetFrameTime();
+		player.jumpForce = 0.0f;
+		player.pos.y = 0;
+	}
+	else 
+	{
+		player.jumpForce = -400.0f;
 	}
 }
 

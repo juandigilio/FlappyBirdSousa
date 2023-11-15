@@ -21,11 +21,14 @@
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\obstacles.cpp" />
+    <ClCompile Include="src\parallax.cpp" />
     <ClCompile Include="src\player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\obstacles.h" />
+    <ClInclude Include="src\parallax.h" />
     <ClInclude Include="src\player.h" />
+    <ClInclude Include="src\scenes.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -103,9 +106,9 @@
       <AdditionalDependencies>raylib.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>
-
-</Command>
+      <Command>cd "$(OutDir)"
+mkdir "assets"
+xcopy /s /e /y "$(SolutionDir)assets" "$(OutDir)assets"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -131,9 +134,7 @@
     <PreBuildEvent>
       <Command>cd "$(OutDir)"
 mkdir "assets"
-xcopy /s /e /y "$(SolutionDir)assets" "$(OutDir)assets"
-
-</Command>
+xcopy /s /e /y "$(SolutionDir)assets" "$(OutDir)assets"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

@@ -1,6 +1,9 @@
 #include "raylib/raylib.h"
+#include "raylib/raymath.h"
 #include "player.h"
 #include "obstacles.h"
+#include "parallax.h"
+#include "scenes.h"
 
 bool collision(Player player, Obstacles topObstacles);
 void resetObstacle(Player player, Obstacles& topObstacles, Obstacles& bottomObstacles);
@@ -10,6 +13,10 @@ const int screenHeight = 768;
 
 const int minObstacleHeight = 50;
 const int maxObstacleHeight = 598;
+
+Texture2D backParallax;
+Texture2D middleParallax;
+Texture2D frontParallax;
 
 int main()
 {
@@ -36,27 +43,74 @@ int main()
     bottomObstacles.width = 40;
     bottomObstacles.coolDown = 0;
 
+    GameScenes actualScene = GameScenes::Game;
+    bool newScene = true;
+    GameScenes prevScene = actualScene;
+
+    float scrollingBack = 0.0f;
+    float scrollingMid = 0.0f;
+    float scrollingFore = 0.0f;
+
     InitWindow(screenWidth, screenHeight, "Flappy Bird");
+
+    backParallax = LoadTexture("assets/backParallax.png");
+    middleParallax = LoadTexture("assets/middleParallax.png");
+    frontParallax = LoadTexture("assets/frontParallax.png");
 
     while (!WindowShouldClose())    
     {
-        playerMovement(player, screenHeight);
+        newScene = actualScene != prevScene;
+        prevScene = actualScene;
 
-        obstaclesMovement(topObstacles, bottomObstacles, screenWidth, screenHeight, minObstacleHeight, maxObstacleHeight);
+        switch (actualScene)
+        {
+        case GameScenes::Menu:
 
-        resetObstacle(player, topObstacles, bottomObstacles);
+            break;
+        case GameScenes::Game:
+            playerMovement(player);
+            obstaclesMovement(topObstacles, bottomObstacles, screenWidth, screenHeight, minObstacleHeight, maxObstacleHeight);
+            resetObstacle(player, topObstacles, bottomObstacles);
+            parallaxUpdate(scrollingBack, scrollingMid, scrollingFore, backParallax, middleParallax, frontParallax);
+            break;
+        case GameScenes::Credits:
+
+            break;
+        case GameScenes::Exit:
+
+            break;
+        default:
+            break;
+        }
 
         BeginDrawing();
 
         ClearBackground(BLACK);
 
-        DrawRectangle(static_cast<int>(player.pos.x), static_cast<int>(player.pos.y), player.width, player.height, YELLOW);
+        switch (actualScene)
+        {
+        case GameScenes::Menu:
 
-        DrawRectangle(static_cast<int>(topObstacles.pos.x), static_cast<int>(topObstacles.pos.y), topObstacles.width, topObstacles.height, GREEN);
-        DrawRectangle(static_cast<int>(bottomObstacles.pos.x), static_cast<int>(bottomObstacles.pos.y), bottomObstacles.width, bottomObstacles.height, GREEN);
+            DrawText("0.2", 20, 20, 30, WHITE);
+            break;
+        case GameScenes::Game:
+            parallaxDraw(scrollingBack, scrollingMid, scrollingFore, backParallax, middleParallax, frontParallax);
 
-        DrawText("0.1", 20, 20, 30, WHITE);
+            DrawRectangle(static_cast<int>(player.pos.x), static_cast<int>(player.pos.y), player.width, player.height, BLACK);
 
+            DrawRectangle(static_cast<int>(topObstacles.pos.x), static_cast<int>(topObstacles.pos.y), topObstacles.width, topObstacles.height, GREEN);
+            DrawRectangle(static_cast<int>(bottomObstacles.pos.x), static_cast<int>(bottomObstacles.pos.y), bottomObstacles.width, bottomObstacles.height, GREEN);
+            break;
+        case GameScenes::Credits:
+
+            break;
+        case GameScenes::Exit:
+
+            break;
+        default:
+            break;
+        }
+     
         EndDrawing();
     }
 
