@@ -11,6 +11,10 @@ struct Player
 	Vector2 velocity;
 	float gravity;
 	float jumpForce;
+	Texture2D texture;
+	bool isJumping;
 };
 
 void playerMovement(Player& player);
+void checkMovementInput(Player& player);
+void changeTexture(Player& player, Texture2D jumpingPlayer, Texture2D idlePlayer);

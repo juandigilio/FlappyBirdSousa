@@ -9,7 +9,7 @@
 #include "pause.h"
 
 bool collision(Player player, Obstacles topObstacles);
-void resetObstacle(Player player, Obstacles& topObstacles, Obstacles& bottomObstacles);
+void resetObstacle(Player& player, Obstacles& topObstacles, Obstacles& bottomObstacles);
 void playerCollitionWhitScreen(Player& player, Obstacles& topObstacles, Obstacles& bottomObstacles);
 void resetStats(Player& player, Obstacles& topObstacles, Obstacles& bottomObstacles);
 
@@ -37,6 +37,8 @@ Texture2D creditsNachoSelectedButton;
 Texture2D resumeUnselectedButton;
 Texture2D resumeSelectedButton;
 Texture2D pause;
+Texture2D idlePlayer;
+Texture2D jumpingPlayer;
 
 int main()
 {
@@ -97,6 +99,8 @@ int main()
     resumeUnselectedButton = LoadTexture("assets/resumeUnselectedButton.png");
     resumeSelectedButton = LoadTexture("assets/resumeSelectedButton.png");
     pause = LoadTexture("assets/pause.png");
+    idlePlayer = LoadTexture("assets/idleOvni.png");
+    jumpingPlayer = LoadTexture("assets/jumpingOvni.png");
 
     while (!WindowShouldClose() && !exitProgram)
     {
@@ -119,6 +123,7 @@ int main()
                 obstaclesMovement(topObstacles, bottomObstacles, screenWidth, screenHeight, minObstacleHeight, maxObstacleHeight);
                 resetObstacle(player, topObstacles, bottomObstacles);
                 playerCollitionWhitScreen(player, topObstacles, bottomObstacles);
+                changeTexture(player, jumpingPlayer, idlePlayer);
             }
             parallaxUpdate(scrollingBack, scrollingMid, scrollingFore, backParallax, middleParallax, frontParallax);
             break;
@@ -147,8 +152,8 @@ int main()
         case GameScenes::Game:
             if (!isGamePaused)
             {
-                parallaxDraw(scrollingBack, scrollingMid, scrollingFore, backParallax, middleParallax, frontParallax);
-                DrawRectangle(static_cast<int>(player.pos.x), static_cast<int>(player.pos.y), player.width, player.height, BLACK);
+                parallaxDraw(scrollingBack, scrollingMid, scrollingFore, backParallax, middleParallax, frontParallax);             
+                DrawTexture(player.texture, static_cast<int>(player.pos.x), static_cast<int>(player.pos.y), WHITE);
                 DrawRectangle(static_cast<int>(topObstacles.pos.x), static_cast<int>(topObstacles.pos.y), topObstacles.width, topObstacles.height, GREEN);
                 DrawRectangle(static_cast<int>(bottomObstacles.pos.x), static_cast<int>(bottomObstacles.pos.y), bottomObstacles.width, bottomObstacles.height, GREEN);
                 DrawTexture(pause, screenWidth / 2 - 200, 738, WHITE);
@@ -186,16 +191,11 @@ bool collision(Player player, Obstacles obstacles)
     return false;
 }
 
-void resetObstacle(Player player, Obstacles& topObstacles, Obstacles& bottomObstacles)
+void resetObstacle(Player& player, Obstacles& topObstacles, Obstacles& bottomObstacles)
 {
     if (collision(player, topObstacles) || collision(player, bottomObstacles))
     {
-        topObstacles.pos.x = screenWidth;
-        topObstacles.height = static_cast<int>(GetRandomValue(minObstacleHeight, maxObstacleHeight));
-        bottomObstacles.pos.x = screenWidth;
-        topObstacles.coolDown = 0;
-        bottomObstacles.height = static_cast<int>(screenHeight - topObstacles.height - bottomObstacles.sepparation);
-        bottomObstacles.pos.y = static_cast<float>(screenHeight - bottomObstacles.height);
+        resetStats(player, topObstacles, bottomObstacles);
     }
 }
 
