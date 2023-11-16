@@ -9,15 +9,5 @@ void playerMovement(Player& player)
 
 	player.velocity.y += player.gravity * GetFrameTime();
 	player.pos.y += player.velocity.y * GetFrameTime();
-
-	if (player.pos.y <= 0)
-	{
-		player.jumpForce = 0.0f;
-		player.pos.y = 0;
-	}
-	else 
-	{
-		player.jumpForce = -400.0f;
-	}
 }
 

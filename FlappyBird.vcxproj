@@ -25,6 +25,7 @@
     <ClCompile Include="src\menu.cpp" />
     <ClCompile Include="src\obstacles.cpp" />
     <ClCompile Include="src\parallax.cpp" />
+    <ClCompile Include="src\pause.cpp" />
     <ClCompile Include="src\player.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -33,6 +34,7 @@
     <ClInclude Include="src\menu.h" />
     <ClInclude Include="src\obstacles.h" />
     <ClInclude Include="src\parallax.h" />
+    <ClInclude Include="src\pause.h" />
     <ClInclude Include="src\player.h" />
     <ClInclude Include="src\scenes.h" />
   </ItemGroup>
