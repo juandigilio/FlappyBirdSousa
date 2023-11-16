@@ -4,6 +4,8 @@
 #include "obstacles.h"
 #include "parallax.h"
 #include "scenes.h"
+#include "credits.h"
+#include "menu.h"
 
 bool collision(Player player, Obstacles topObstacles);
 void resetObstacle(Player player, Obstacles& topObstacles, Obstacles& bottomObstacles);
@@ -17,6 +19,18 @@ const int maxObstacleHeight = 598;
 Texture2D backParallax;
 Texture2D middleParallax;
 Texture2D frontParallax;
+Texture2D menuUnselectedButton;
+Texture2D menuSelectedButton;
+Texture2D playUnselectedButton;
+Texture2D playSelectedButton;
+Texture2D creditsUnselectedButton;
+Texture2D creditsSelectedButton;
+Texture2D exitUnselectedButton;
+Texture2D exitSelectedButton;
+Texture2D creditsParallaxUnselectedButton;
+Texture2D creditsParallaxSelectedButton;
+Texture2D creditsNachoUnselectedButton;
+Texture2D creditsNachoSelectedButton;
 
 int main()
 {
@@ -43,9 +57,11 @@ int main()
     bottomObstacles.width = 40;
     bottomObstacles.coolDown = 0;
 
-    GameScenes actualScene = GameScenes::Game;
+    GameScenes actualScene = GameScenes::Menu;
     bool newScene = true;
     GameScenes prevScene = actualScene;
+
+    bool exitProgram = false;
 
     float scrollingBack = 0.0f;
     float scrollingMid = 0.0f;
@@ -56,8 +72,20 @@ int main()
     backParallax = LoadTexture("assets/backParallax.png");
     middleParallax = LoadTexture("assets/middleParallax.png");
     frontParallax = LoadTexture("assets/frontParallax.png");
+    menuUnselectedButton = LoadTexture("assets/menuUnselectedButton.png");
+    menuSelectedButton = LoadTexture("assets/menuSelectedButton.png");
+    playUnselectedButton = LoadTexture("assets/playUnselectedButton.png");
+    playSelectedButton = LoadTexture("assets/playSelectedButton.png");
+    creditsUnselectedButton = LoadTexture("assets/creditsUnselectedButton.png");
+    creditsSelectedButton = LoadTexture("assets/creditsSelectedButton.png");
+    exitUnselectedButton = LoadTexture("assets/exitUnselectedButton.png");
+    exitSelectedButton = LoadTexture("assets/exitSelectedButton.png");
+    creditsParallaxUnselectedButton = LoadTexture("assets/parallaxUnselectedButton.png");
+    creditsParallaxSelectedButton = LoadTexture("assets/parallaxSelectedButton.png");
+    creditsNachoUnselectedButton = LoadTexture("assets/creditsUnselectedNacho.png");
+    creditsNachoSelectedButton = LoadTexture("assets/creditsSelectedNacho.png");
 
-    while (!WindowShouldClose())    
+    while (!WindowShouldClose() && !exitProgram)
     {
         newScene = actualScene != prevScene;
         prevScene = actualScene;
@@ -74,10 +102,10 @@ int main()
             parallaxUpdate(scrollingBack, scrollingMid, scrollingFore, backParallax, middleParallax, frontParallax);
             break;
         case GameScenes::Credits:
-
+            
             break;
         case GameScenes::Exit:
-
+            exitProgram = true;
             break;
         default:
             break;
@@ -90,22 +118,19 @@ int main()
         switch (actualScene)
         {
         case GameScenes::Menu:
-
-            DrawText("0.2", 20, 20, 30, WHITE);
+            drawMenu(actualScene, screenWidth, playUnselectedButton, playSelectedButton, creditsUnselectedButton, creditsSelectedButton, exitUnselectedButton, exitSelectedButton, backParallax, middleParallax, frontParallax);
             break;
         case GameScenes::Game:
             parallaxDraw(scrollingBack, scrollingMid, scrollingFore, backParallax, middleParallax, frontParallax);
-
             DrawRectangle(static_cast<int>(player.pos.x), static_cast<int>(player.pos.y), player.width, player.height, BLACK);
-
             DrawRectangle(static_cast<int>(topObstacles.pos.x), static_cast<int>(topObstacles.pos.y), topObstacles.width, topObstacles.height, GREEN);
             DrawRectangle(static_cast<int>(bottomObstacles.pos.x), static_cast<int>(bottomObstacles.pos.y), bottomObstacles.width, bottomObstacles.height, GREEN);
             break;
         case GameScenes::Credits:
-
+            creditsDraw(actualScene, screenWidth, menuUnselectedButton, menuSelectedButton, creditsNachoUnselectedButton, creditsNachoSelectedButton, creditsParallaxUnselectedButton, creditsParallaxSelectedButton, backParallax, middleParallax, frontParallax);
             break;
         case GameScenes::Exit:
-
+            exitProgram = true;
             break;
         default:
             break;
@@ -137,6 +162,7 @@ void resetObstacle(Player player, Obstacles& topObstacles, Obstacles& bottomObst
         topObstacles.pos.x = screenWidth;
         topObstacles.height = static_cast<int>(GetRandomValue(minObstacleHeight, maxObstacleHeight));
         bottomObstacles.pos.x = screenWidth;
+        topObstacles.coolDown = 0;
         bottomObstacles.height = static_cast<int>(screenHeight - topObstacles.height - bottomObstacles.sepparation);
         bottomObstacles.pos.y = static_cast<float>(screenHeight - bottomObstacles.height);
     }

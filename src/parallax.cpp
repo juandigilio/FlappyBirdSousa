@@ -42,3 +42,12 @@ void parallaxDraw(float& scrollingBack, float& scrollingMid, float& scrollingFor
     DrawTextureEx(frontParallax, cinco, 0.0f, 1.0f, WHITE);
     DrawTextureEx(frontParallax, seis, 0.0f, 1.0f, WHITE);
 }
+
+void staticParallaxDraw(Texture2D backParallax, Texture2D middleParallax, Texture2D frontParallax)
+{
+    DrawTextureEx(backParallax, { 0.0f , 0 }, 0.0f, 1.0f, WHITE);
+
+    DrawTextureEx(middleParallax, { 0.0f, 0 }, 0.0f, 1.0f, WHITE);
+
+    DrawTextureEx(frontParallax, { 0.0f, 0 }, 0.0f, 1.0f, WHITE);
+}

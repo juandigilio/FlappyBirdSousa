@@ -19,12 +19,18 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\buttons.cpp" />
+    <ClCompile Include="src\credits.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\menu.cpp" />
     <ClCompile Include="src\obstacles.cpp" />
     <ClCompile Include="src\parallax.cpp" />
     <ClCompile Include="src\player.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\buttons.h" />
+    <ClInclude Include="src\credits.h" />
+    <ClInclude Include="src\menu.h" />
     <ClInclude Include="src\obstacles.h" />
     <ClInclude Include="src\parallax.h" />
     <ClInclude Include="src\player.h" />
