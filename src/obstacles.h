@@ -11,4 +11,5 @@ struct Obstacles
 	int sepparation = 120;
 };
 
+void setObstacles(Obstacles& topObstacles, Obstacles& bottomObstacles);
 void obstaclesMovement(Obstacles& topObstacle, Obstacles& bottomObstacles, int screenWidth, int screenHeight, int minObstacleHeight, int maxObstacleHeight);

@@ -1,5 +1,26 @@
 #include "obstacles.h"
 
+#include "gameData.h"
+
+using namespace Globals;
+
+void setObstacles(Obstacles& topObstacles, Obstacles& bottomObstacles)
+{
+	topObstacles.pos.x = screenWidth;
+	topObstacles.pos.y = 0;
+	topObstacles.speed = 600;
+	topObstacles.width = 40;
+	topObstacles.height = static_cast<int>(GetRandomValue(minObstacleHeight, maxObstacleHeight));
+	topObstacles.coolDown = 0;
+
+	bottomObstacles.pos.x = screenWidth;
+	bottomObstacles.height = screenHeight - topObstacles.height - bottomObstacles.sepparation;
+	bottomObstacles.pos.y = static_cast<float>(screenHeight - bottomObstacles.height);
+	bottomObstacles.speed = 600;
+	bottomObstacles.width = 40;
+	bottomObstacles.coolDown = 0;
+}
+
 void obstaclesMovement(Obstacles& topObstacles, Obstacles& bottomObstacles, int screenWidth, int screenHeight, int minObstacleHeight, int maxObstacleHeight)
 {
 	topObstacles.coolDown += GetFrameTime();

@@ -13,7 +13,9 @@ struct Player
 	float jumpForce;
 	Texture2D texture;
 	bool isJumping;
+	bool isColliding;
 };
 
-void playerMovement(Player& player);
+void setPlayer(Player& player);
+void getPlayerInput(Player& player);
 Texture2D changeTexture(Texture2D jumpingPlayer, Texture2D idlePlayer, Player player);

@@ -21,22 +21,27 @@
   <ItemGroup>
     <ClCompile Include="src\buttons.cpp" />
     <ClCompile Include="src\credits.cpp" />
+    <ClCompile Include="src\gameData.cpp" />
+    <ClCompile Include="src\GamePlay.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\menu.cpp" />
     <ClCompile Include="src\obstacles.cpp" />
     <ClCompile Include="src\parallax.cpp" />
     <ClCompile Include="src\pause.cpp" />
     <ClCompile Include="src\player.cpp" />
+    <ClCompile Include="src\sceenManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\buttons.h" />
     <ClInclude Include="src\credits.h" />
+    <ClInclude Include="src\gameData.h" />
+    <ClInclude Include="src\GamePlay.h" />
     <ClInclude Include="src\menu.h" />
     <ClInclude Include="src\obstacles.h" />
     <ClInclude Include="src\parallax.h" />
     <ClInclude Include="src\pause.h" />
     <ClInclude Include="src\player.h" />
-    <ClInclude Include="src\scenes.h" />
+    <ClInclude Include="src\sceenManager.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
