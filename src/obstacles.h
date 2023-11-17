@@ -12,4 +12,5 @@ struct Obstacles
 };
 
 void setObstacles(Obstacles& topObstacles, Obstacles& bottomObstacles);
-void obstaclesMovement(Obstacles& topObstacle, Obstacles& bottomObstacles, int screenWidth, int screenHeight, int minObstacleHeight, int maxObstacleHeight);
+void updateObtacles(Obstacles& topObstacle, Obstacles& bottomObstacles);
+void drawObstacles(Obstacles& topObstacles, Obstacles& bottomObstacles);

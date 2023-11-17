@@ -6,14 +6,14 @@ using namespace Globals;
 
 void setObstacles(Obstacles& topObstacles, Obstacles& bottomObstacles)
 {
-	topObstacles.pos.x = screenWidth;
+	topObstacles.pos.x = static_cast<float>(screenWidth);
 	topObstacles.pos.y = 0;
 	topObstacles.speed = 600;
 	topObstacles.width = 40;
 	topObstacles.height = static_cast<int>(GetRandomValue(minObstacleHeight, maxObstacleHeight));
 	topObstacles.coolDown = 0;
 
-	bottomObstacles.pos.x = screenWidth;
+	bottomObstacles.pos.x = static_cast<float>(screenWidth);
 	bottomObstacles.height = screenHeight - topObstacles.height - bottomObstacles.sepparation;
 	bottomObstacles.pos.y = static_cast<float>(screenHeight - bottomObstacles.height);
 	bottomObstacles.speed = 600;
@@ -21,7 +21,7 @@ void setObstacles(Obstacles& topObstacles, Obstacles& bottomObstacles)
 	bottomObstacles.coolDown = 0;
 }
 
-void obstaclesMovement(Obstacles& topObstacles, Obstacles& bottomObstacles, int screenWidth, int screenHeight, int minObstacleHeight, int maxObstacleHeight)
+void updateObtacles(Obstacles& topObstacles, Obstacles& bottomObstacles)
 {
 	topObstacles.coolDown += GetFrameTime();
 
@@ -40,5 +40,12 @@ void obstaclesMovement(Obstacles& topObstacles, Obstacles& bottomObstacles, int 
 		bottomObstacles.height = static_cast<int>(screenHeight - topObstacles.height - bottomObstacles.sepparation);
 		bottomObstacles.pos.y = static_cast<float>(screenHeight - bottomObstacles.height);
 	}
+}
+
+void drawObstacles(Obstacles& topObstacles, Obstacles& bottomObstacles)
+{
+	DrawRectangle(static_cast<int>(topObstacles.pos.x), static_cast<int>(topObstacles.pos.y), topObstacles.width, topObstacles.height, GREEN);
+	DrawRectangle(static_cast<int>(bottomObstacles.pos.x), static_cast<int>(bottomObstacles.pos.y), bottomObstacles.width, bottomObstacles.height, GREEN);
+	DrawTexture(pause, screenWidth / 2 - 200, 738, WHITE);
 }
 

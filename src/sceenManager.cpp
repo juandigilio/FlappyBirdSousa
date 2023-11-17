@@ -3,6 +3,10 @@
 #include <iostream>
 
 #include "gameData.h"
+#include "menu.h"
+#include "credits.h"
+#include "gamePlay.h"
+#include "pause.h"
 #include "player.h"
 #include "obstacles.h"
 
@@ -47,8 +51,6 @@ void runGame()
 
     GameSceen actualScene = GameSceen::Menu;
 
-    GameSceen prevScene = actualScene;
-
     InitWindow(screenWidth, screenHeight, "Flappy Bird");
 
     InitAudioDevice();
@@ -57,77 +59,38 @@ void runGame()
 
     while (!WindowShouldClose() && !exitProgram)
     {
-        newScene = actualScene != prevScene;
-        prevScene = actualScene;
-
-        
-
-        switch (actualScene)
-        {
-        case GameSceen::Menu:
-            resetStats(player, topObstacles, bottomObstacles);
-            break;
-        case GameSceen::Game:
-            if (!isGamePaused)
-            {
-                if (IsMouseButtonPressed(2))
-                {
-                    actualScene = GameSceen::Pause;
-                }
-                getPlayerInput(player);
-                obstaclesMovement(topObstacles, bottomObstacles, screenWidth, screenHeight, minObstacleHeight, maxObstacleHeight);
-                resetObstacle(player, topObstacles, bottomObstacles);
-                playerCollitionWhitScreen(player, topObstacles, bottomObstacles);
-            }
-            parallaxUpdate(scrollingBack, scrollingMid, scrollingFore, backParallax, middleParallax, frontParallax);
-            break;
-        case GameSceen::Pause:
-
-            break;
-        case GameSceen::Credits:
-
-            break;
-        case GameSceen::Exit:
-            exitProgram = true;
-            break;
-        default:
-            break;
-        }
-
         BeginDrawing();
-
         ClearBackground(BLACK);
 
         switch (actualScene)
         {
-        case GameSceen::Menu:
-            drawMenu(actualScene, screenWidth, playUnselectedButton, playSelectedButton, creditsUnselectedButton, creditsSelectedButton, exitUnselectedButton, exitSelectedButton, backParallax, middleParallax, frontParallax);
-            break;
-        case GameSceen::Game:
-            if (!isGamePaused)
+            case GameSceen::Menu:
             {
-                parallaxDraw(scrollingBack, scrollingMid, scrollingFore, backParallax, middleParallax, frontParallax);
-                DrawTexture(player.texture, static_cast<int>(player.pos.x), static_cast<int>(player.pos.y), WHITE);
-                DrawRectangle(static_cast<int>(topObstacles.pos.x), static_cast<int>(topObstacles.pos.y), topObstacles.width, topObstacles.height, GREEN);
-                DrawRectangle(static_cast<int>(bottomObstacles.pos.x), static_cast<int>(bottomObstacles.pos.y), bottomObstacles.width, bottomObstacles.height, GREEN);
-                DrawTexture(pause, screenWidth / 2 - 200, 738, WHITE);
+                showMenu(actualScene);
+                break;
+            }          
+            case GameSceen::Game:
+            {
+                gameLoop(player, topObstacles, bottomObstacles);
+                break;
             }
-            break;
-        case GameSceen::Pause:
-            drawPause(actualScene, screenWidth, screenHeight, menuUnselectedButton, menuSelectedButton, resumeUnselectedButton, resumeSelectedButton, backParallax, middleParallax, frontParallax, isGamePaused);
-            break;
-        case GameSceen::Credits:
-            creditsDraw(actualScene, screenWidth, menuUnselectedButton, menuSelectedButton, creditsNachoUnselectedButton, creditsNachoSelectedButton, creditsParallaxUnselectedButton, creditsParallaxSelectedButton, backParallax, middleParallax, frontParallax);
-            break;
-        case GameSceen::Exit:
-            exitProgram = true;
-            break;
-        default:
-            break;
+            case GameSceen::Pause:
+            {
+
+                break;
+            }
+            case GameSceen::Credits:
+            {
+                showCredits(actualScene);
+                break;
+            }
+            case GameSceen::Exit:
+            {
+                CloseWindow();
+                break;
+            }
         }
 
         EndDrawing();
     }
-
-    CloseWindow();
 }

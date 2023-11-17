@@ -38,4 +38,6 @@ namespace Globals
 	extern float scrollingFore = 0.0f;
 
 	extern int middleButtons{};
+
+	extern bool firstTime = true;
 }

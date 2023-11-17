@@ -7,7 +7,7 @@ using namespace Globals;
 void setPlayer(Player& player)
 {
     player.pos.x = 100;
-    player.pos.y = screenHeight / 2;
+    player.pos.y = static_cast<float>(screenHeight / 2);
     player.speed = 400;
     player.width = 60;
     player.height = 60;
@@ -59,7 +59,7 @@ static bool checkCollision(Player player, Obstacles obstacles)
     return false;
 }
 
-Texture2D changeTexture(Texture2D jumpingPlayer, Texture2D idlePlayer, Player player)
+Texture2D changeTexture(Player player)
 {
     if (player.isJumping == true)
     {
@@ -73,7 +73,7 @@ Texture2D changeTexture(Texture2D jumpingPlayer, Texture2D idlePlayer, Player pl
 
 void updatePlayer(Player& player, Obstacles& topObstacles, Obstacles& bottomObstacles)
 {
-    player.texture = changeTexture(jumpingPlayer, idlePlayer, player);
+    player.texture = changeTexture(player);
 
     movePlayer(player);
 
@@ -81,4 +81,16 @@ void updatePlayer(Player& player, Obstacles& topObstacles, Obstacles& bottomObst
     {
         player.isColliding = true;
     }
+    else
+    {
+        if (player.pos.y > screenHeight)
+        {
+            player.isColliding = true;
+        }
+    }
+}
+
+void drawPlayer(Player& player)
+{
+    DrawTexture(player.texture, static_cast<int>(player.pos.x), static_cast<int>(player.pos.y), WHITE);
 }

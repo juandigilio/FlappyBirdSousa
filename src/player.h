@@ -18,4 +18,5 @@ struct Player
 
 void setPlayer(Player& player);
 void getPlayerInput(Player& player);
-Texture2D changeTexture(Texture2D jumpingPlayer, Texture2D idlePlayer, Player player);
+void updatePlayer(Player& player, Obstacles& topObstacles, Obstacles& bottomObstacles);
+void drawPlayer(Player& player);

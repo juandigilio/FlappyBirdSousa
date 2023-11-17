@@ -50,5 +50,6 @@ namespace Globals
 	 
 	extern int middleButtons;
 
+	extern bool firstTime;
 }
 

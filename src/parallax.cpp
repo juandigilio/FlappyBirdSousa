@@ -1,6 +1,10 @@
 #include "parallax.h"
 
-void parallaxUpdate(float& scrollingBack, float& scrollingMid, float& scrollingFore, Texture2D& backParallax, Texture2D& middleParallax, Texture2D& frontParallax)
+#include "gameData.h"
+
+using namespace Globals;
+
+void updateParallax()
 {
     scrollingBack -= 300.0f * GetFrameTime();
     scrollingMid -= 500.0f * GetFrameTime();
@@ -22,7 +26,7 @@ void parallaxUpdate(float& scrollingBack, float& scrollingMid, float& scrollingF
     }
 }
 
-void parallaxDraw(float& scrollingBack, float& scrollingMid, float& scrollingFore, Texture2D& backParallax, Texture2D& middleParallax, Texture2D& frontParallax)
+void drawParallax()
 {
     Vector2 uno = { scrollingBack , 0 };
     Vector2 dos = { backParallax.width + scrollingBack, 0 };
@@ -43,7 +47,7 @@ void parallaxDraw(float& scrollingBack, float& scrollingMid, float& scrollingFor
     DrawTextureEx(frontParallax, seis, 0.0f, 1.0f, WHITE);
 }
 
-void staticParallaxDraw(Texture2D backParallax, Texture2D middleParallax, Texture2D frontParallax)
+void staticParallaxDraw()
 {
     DrawTextureEx(backParallax, { 0.0f , 0 }, 0.0f, 1.0f, WHITE);
 

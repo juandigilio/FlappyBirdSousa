@@ -27,9 +27,6 @@
     <ClCompile Include="src\parallax.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="src\buttons.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
     <ClCompile Include="src\credits.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
@@ -42,7 +39,7 @@
     <ClCompile Include="src\gameData.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="src\GamePlay.cpp">
+    <ClCompile Include="src\gamePlay.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="src\sceenManager.cpp">
@@ -59,9 +56,6 @@
     <ClInclude Include="src\parallax.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="src\buttons.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="src\credits.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
@@ -74,7 +68,7 @@
     <ClInclude Include="src\gameData.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="src\GamePlay.h">
+    <ClInclude Include="src\gamePlay.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="src\sceenManager.h">
