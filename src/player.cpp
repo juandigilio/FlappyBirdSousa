@@ -5,29 +5,26 @@ void playerMovement(Player& player)
 	if (IsKeyPressed(KEY_SPACE) && player.pos.y > 0)
 	{
 		player.velocity.y = player.jumpForce;
+        player.isJumping = true;
 	}
 
 	player.velocity.y += player.gravity * GetFrameTime();
 	player.pos.y += player.velocity.y * GetFrameTime();
-}
 
-void checkMovementInput(Player& player)
-{
-    if (IsMouseButtonPressed(MOUSE_RIGHT_BUTTON))
+    if (player.isJumping && player.velocity.y > 0)
     {
-        player.velocity.y = player.jumpForce;
-        player.isJumping = true;
+        player.isJumping = false;
     }
 }
 
-void changeTexture(Player& player, Texture2D jumpingPlayer, Texture2D idlePlayer)
+Texture2D changeTexture(Texture2D jumpingPlayer, Texture2D idlePlayer, Player player)
 {
     if (player.isJumping == true)
     {
-        player.texture = jumpingPlayer;
+        return jumpingPlayer;
     }
     else
     {
-        player.texture = idlePlayer;
+        return idlePlayer;
     }
 }

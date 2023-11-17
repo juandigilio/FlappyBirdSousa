@@ -16,5 +16,4 @@ struct Player
 };
 
 void playerMovement(Player& player);
-void checkMovementInput(Player& player);
-void changeTexture(Player& player, Texture2D jumpingPlayer, Texture2D idlePlayer);
+Texture2D changeTexture(Texture2D jumpingPlayer, Texture2D idlePlayer, Player player);

@@ -40,7 +40,7 @@ Texture2D pause;
 Texture2D idlePlayer;
 Texture2D jumpingPlayer;
 
-int main()
+void main()
 {
     Player player;
     player.pos.x = 100;
@@ -51,6 +51,7 @@ int main()
     player.velocity = { 0, 0 };
     player.gravity = 600.0;
     player.jumpForce = -400.0f;
+
 
     Obstacles topObstacles;
     topObstacles.pos.x = screenWidth;   
@@ -107,6 +108,8 @@ int main()
         newScene = actualScene != prevScene;
         prevScene = actualScene;
 
+        player.texture = changeTexture(jumpingPlayer, idlePlayer, player);
+
         switch (actualScene)
         {
         case GameScenes::Menu:
@@ -122,8 +125,7 @@ int main()
                 playerMovement(player);
                 obstaclesMovement(topObstacles, bottomObstacles, screenWidth, screenHeight, minObstacleHeight, maxObstacleHeight);
                 resetObstacle(player, topObstacles, bottomObstacles);
-                playerCollitionWhitScreen(player, topObstacles, bottomObstacles);
-                changeTexture(player, jumpingPlayer, idlePlayer);
+                playerCollitionWhitScreen(player, topObstacles, bottomObstacles);              
             }
             parallaxUpdate(scrollingBack, scrollingMid, scrollingFore, backParallax, middleParallax, frontParallax);
             break;
@@ -176,8 +178,6 @@ int main()
     }
 
     CloseWindow();
-
-    return 0;
 }
 
 bool collision(Player player, Obstacles obstacles)
