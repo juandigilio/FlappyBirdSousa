@@ -28,7 +28,7 @@ static void updateGame(Player& player, Obstacles& topObstacles, Obstacles& botto
 	}
 }
 
-static void drawGame(Player player, Obstacles topObstacles, Obstacles bottomObstacles)
+static void drawGame(Player& player, Obstacles& topObstacles, Obstacles& bottomObstacles)
 {
 	drawParallax();
 

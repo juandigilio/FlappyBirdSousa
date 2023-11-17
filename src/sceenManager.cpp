@@ -32,8 +32,8 @@ static void loadAssets()
     resumeUnselectedButton = LoadTexture("assets/resumeUnselectedButton.png");
     resumeSelectedButton = LoadTexture("assets/resumeSelectedButton.png");
     pause = LoadTexture("assets/pause.png");
-    idlePlayer = LoadTexture("assets/idleOvni.png");
-    jumpingPlayer = LoadTexture("assets/jumpingOvni.png");
+    idlePlayer = LoadTexture("assets/gamePlay/ass.png");
+    jumpingPlayer = LoadTexture("assets/gamePlay/assSprite.png");
 }
 
 void runGame()
@@ -43,19 +43,20 @@ void runGame()
     SetConfigFlags(FLAG_MSAA_4X_HINT);
 
     Player player;
-    setPlayer(player);
-
     Obstacles topObstacles;
     Obstacles bottomObstacles;
-    setObstacles(topObstacles, bottomObstacles);
-
+   
     GameSceen actualScene = GameSceen::Menu;
 
     InitWindow(screenWidth, screenHeight, "Flappy Bird");
 
-    InitAudioDevice();
+    InitAudioDevice();    
 
     loadAssets();
+
+    setPlayer(player);
+
+    setObstacles(topObstacles, bottomObstacles);
 
     while (!WindowShouldClose() && !exitProgram)
     {
