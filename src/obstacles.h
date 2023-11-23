@@ -3,12 +3,14 @@
 
 struct Obstacles
 {
+	Texture2D texture;
+	Texture2D shitedTexture;
 	Vector2 pos = { 0, 0 };
 	int speed = 0;
 	int height = 0;
 	int width = 0;
 	float coolDown = 0;
-	int sepparation = 120;
+	int sepparation = 200;
 };
 
 void setObstacles(Obstacles& topObstacles, Obstacles& bottomObstacles);

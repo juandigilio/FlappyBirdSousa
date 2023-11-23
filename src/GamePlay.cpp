@@ -7,48 +7,60 @@
 
 using namespace Globals;
 
-static void resetStats(Player& player, Obstacles& topObstacles, Obstacles& bottomObstacles)
+static void resetStats(Player& player, Player& player2, Obstacles& topObstacles, Obstacles& bottomObstacles)
 {
-	setPlayer(player);
+	setPlayer(player, player2);
+
 	setObstacles(topObstacles, bottomObstacles);
 }
 
-static void updateGame(Player& player, Obstacles& topObstacles, Obstacles& bottomObstacles)
+static void getInput(Player& player, Player& player2)
+{
+	getPlayerInput(player, player2);
+}
+
+static void updateGame(Player& player, Player& player2, Obstacles& topObstacles, Obstacles& bottomObstacles)
 {
 	updateParallax();
 
-	updatePlayer(player, topObstacles, bottomObstacles);
+	updatePlayer(player, player2, topObstacles, bottomObstacles);
 
 	updateObtacles(topObstacles, bottomObstacles);
 
-	if (player.isColliding)
+	if (player.isColliding || player2.isColliding)
 	{
-		resetStats(player, topObstacles, bottomObstacles);
+		resetStats(player, player2, topObstacles, bottomObstacles);
 		player.isColliding = false;
+		player2.isColliding = false;
 	}
 }
 
-static void drawGame(Player& player, Obstacles& topObstacles, Obstacles& bottomObstacles)
+static void drawGame(Player& player, Player& player2, Obstacles& topObstacles, Obstacles& bottomObstacles)
 {
 	drawParallax();
 
 	drawPlayer(player);
 
+	if (multiPlayer)
+	{
+		drawPlayer(player2);
+	}
+
 	drawObstacles(topObstacles, bottomObstacles);
 }
 
-void gameLoop(Player& player, Obstacles& topObstacles, Obstacles& bottomObstacles)
+void gameLoop(Player& player, Player& player2, Obstacles& topObstacles, Obstacles& bottomObstacles)
 {
 	if (firstTime)
 	{
-		resetStats(player, topObstacles, bottomObstacles);
+		resetStats(player, player2, topObstacles, bottomObstacles);
 
 		firstTime = false;
 	}
 
-	getPlayerInput(player);
+	getInput(player, player2);
 
-	updateGame(player, topObstacles, bottomObstacles);
+	updateGame(player, player2, topObstacles, bottomObstacles);
 
-	drawGame(player, topObstacles, bottomObstacles);
+	drawGame(player, player2, topObstacles, bottomObstacles);
 }

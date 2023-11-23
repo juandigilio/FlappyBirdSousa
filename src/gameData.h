@@ -41,6 +41,7 @@ namespace Globals
 	extern Texture2D jumpingPlayer;
 	 
 	extern bool newScene;
+	extern bool multiPlayer;
 	extern bool exitProgram;
 	extern bool isGamePaused;
 	 

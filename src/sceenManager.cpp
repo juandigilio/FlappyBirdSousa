@@ -43,6 +43,7 @@ void runGame()
     SetConfigFlags(FLAG_MSAA_4X_HINT);
 
     Player player;
+    Player player2;
     Obstacles topObstacles;
     Obstacles bottomObstacles;
    
@@ -54,7 +55,7 @@ void runGame()
 
     loadAssets();
 
-    setPlayer(player);
+    setPlayer(player, player2);
 
     setObstacles(topObstacles, bottomObstacles);
 
@@ -72,7 +73,7 @@ void runGame()
             }          
             case GameSceen::Game:
             {
-                gameLoop(player, topObstacles, bottomObstacles);
+                gameLoop(player, player2, topObstacles, bottomObstacles);
                 break;
             }
             case GameSceen::Pause:

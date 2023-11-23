@@ -3,8 +3,9 @@
 static int height = 100;
 static int width = 200;
 static int playY = 300;
-static int creditsY = 400;
-static int exitY = 500;
+static int multiY = 400;
+static int creditsY = 500;
+static int exitY = 600;
 
 using namespace Globals;
 
@@ -14,11 +15,12 @@ static void drawMenu()
 
 	staticParallaxDraw();
 
-	DrawTexture(playUnselectedButton, middleButtons, 300, WHITE);
-	DrawTexture(creditsUnselectedButton, middleButtons, 400, WHITE);
-	DrawTexture(exitUnselectedButton, middleButtons, 500, WHITE);
+	DrawTexture(playUnselectedButton, middleButtons, playY, WHITE);
+	DrawTexture(playUnselectedButton, middleButtons, multiY, WHITE);
+	DrawTexture(creditsUnselectedButton, middleButtons, creditsY, WHITE);
+	DrawTexture(exitUnselectedButton, middleButtons, exitY, WHITE);
 
-	DrawText("Version: 0.2", 20, 20, 30, WHITE);
+	DrawText("Version: 0.3", 20, 20, 30, WHITE);
 }
 
 static void checkMenuInput(GameSceen& actualSceen)
@@ -34,6 +36,20 @@ static void checkMenuInput(GameSceen& actualSceen)
 
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
+			actualSceen = GameSceen::Game;
+		}
+	}
+
+	if (GetMouseX() >= middleButtons
+		&& GetMouseX() <= middleButtons + width / 2
+		&& GetMouseY() >= multiY
+		&& GetMouseY() <= multiY + height / 2)
+	{
+		DrawTexture(playSelectedButton, middleButtons, multiY, WHITE);
+
+		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+		{
+			multiPlayer = true;
 			actualSceen = GameSceen::Game;
 		}
 	}

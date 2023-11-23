@@ -8,7 +8,7 @@ using namespace std;
 
 using namespace Globals;
 
-void setPlayer(Player& player)
+void setPlayer(Player& player, Player& player2)
 {
     player.pos.x = 100;
     player.pos.y = static_cast<float>(screenHeight / 2);
@@ -22,11 +22,35 @@ void setPlayer(Player& player)
     player.isJumping = false;
     player.frame = 0;
 
-    player.textureIddle = LoadTexture("assets/gamePlay/ass.png");
-    player.textureJumping = LoadTexture("assets/gamePlay/assSprite.png");
+    if (firstTime)
+    {
+        player.textureIddle = LoadTexture("assets/gamePlay/ass.png");
+        player.textureJumping = LoadTexture("assets/gamePlay/assSprite.png");
+    }
+   
+    if (multiPlayer)
+    {
+        player2.pos.x = 100;
+        player2.pos.y = static_cast<float>(screenHeight / 2);
+        player2.speed = 400;
+        player2.width = 60;
+        player2.height = 60;
+        player2.velocity = { 0, 0 };
+        player2.gravity = 600.0;
+        player2.jumpForce = -400.0f;
+        player2.isColliding = false;
+        player2.isJumping = false;
+        player2.frame = 0;
+
+        if (firstTime)
+        {
+            player2.textureIddle = LoadTexture("assets/gamePlay/ass2.png");
+            player2.textureJumping = LoadTexture("assets/gamePlay/assSprite2.png");
+        }
+    }
 }
 
-void getPlayerInput(Player& player)
+void getPlayerInput(Player& player, Player& player2)
 {
     if (player.pos.y <= 0)
     {
@@ -38,7 +62,7 @@ void getPlayerInput(Player& player)
         player.jumpForce = -400.0f;
     }
 
-	if (IsKeyPressed(KEY_SPACE) && player.pos.y > 0)
+	if (IsKeyPressed(KEY_LEFT_CONTROL) && player.pos.y > 0)
 	{
 		player.velocity.y = player.jumpForce;
         player.isJumping = true;
@@ -46,10 +70,26 @@ void getPlayerInput(Player& player)
         player.lastFrame = GetTime();
 	}
 
-   /* if (player.isJumping && player.velocity.y > 0)
+    if (multiPlayer)
     {
-        player.isJumping = false;
-    }*/
+        if (player2.pos.y <= 0)
+        {
+            player2.jumpForce = 0.0f;
+            player2.pos.y = 0;
+        }
+        else
+        {
+            player2.jumpForce = -400.0f;
+        }
+
+        if (IsKeyPressed(KEY_RIGHT_CONTROL) && player2.pos.y > 0)
+        {
+            player2.velocity.y = player2.jumpForce;
+            player2.isJumping = true;
+            player2.frame = 0;
+            player2.lastFrame = GetTime();
+        }
+    }
 }
 
 static void movePlayer(Player& player)
@@ -60,16 +100,18 @@ static void movePlayer(Player& player)
 
 static bool checkCollision(Player player, Obstacles obstacles)
 {
-    if (player.pos.x + player.width >= obstacles.pos.x &&
-        player.pos.x <= obstacles.pos.x + obstacles.width &&
-        player.pos.y + player.height >= obstacles.pos.y &&
-        player.pos.y <= obstacles.pos.y + obstacles.height) {
+    if (player.pos.x + player.textureIddle.width >= obstacles.pos.x &&
+        player.pos.x <= obstacles.pos.x + obstacles.texture.width &&
+        player.pos.y + player.textureIddle.height >= obstacles.pos.y &&
+        player.pos.y <= obstacles.pos.y + obstacles.texture.height) 
+    {
         return true;
     }
+
     return false;
 }
 
-void updatePlayer(Player& player, Obstacles& topObstacles, Obstacles& bottomObstacles)
+void updatePlayer(Player& player, Player& player2,Obstacles& topObstacles, Obstacles& bottomObstacles)
 {
     movePlayer(player);
 
@@ -82,6 +124,23 @@ void updatePlayer(Player& player, Obstacles& topObstacles, Obstacles& bottomObst
         if (player.pos.y > screenHeight)
         {
             player.isColliding = true;
+        }
+    }
+
+    if (multiPlayer)
+    {
+        movePlayer(player2);
+
+        if (checkCollision(player2, topObstacles) || checkCollision(player2, bottomObstacles))
+        {
+            player2.isColliding = true;
+        }
+        else
+        {
+            if (player2.pos.y > screenHeight)
+            {
+                player2.isColliding = true;
+            }
         }
     }
 }
@@ -133,8 +192,6 @@ void drawPlayer(Player& player)
         }
 
         double elapsedTime = GetTime() - player.lastFrame;
-
-        //cout << "elapsed: " << elapsedTime << endl;
 
         if (elapsedTime > 0.07f)
         {

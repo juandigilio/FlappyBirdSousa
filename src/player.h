@@ -26,7 +26,7 @@ struct Player
 	}
 };
 
-void setPlayer(Player& player);
-void getPlayerInput(Player& player);
-void updatePlayer(Player& player, Obstacles& topObstacles, Obstacles& bottomObstacles);
+void setPlayer(Player& player, Player& player2);
+void getPlayerInput(Player& player, Player& player2);
+void updatePlayer(Player& player, Player& player2, Obstacles& topObstacles, Obstacles& bottomObstacles);
 void drawPlayer(Player& player);
