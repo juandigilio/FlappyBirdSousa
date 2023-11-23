@@ -14,6 +14,7 @@ using namespace Globals;
 
 static void loadAssets()
 {
+    menuBackground = LoadTexture("assets/menuBackground.png");
     backParallax = LoadTexture("assets/backParallax.png");
     middleParallax = LoadTexture("assets/middleParallax.png");
     frontParallax = LoadTexture("assets/frontParallax.png");
@@ -93,6 +94,9 @@ void runGame()
             }
         }
 
-        EndDrawing();
+        if (actualScene != GameSceen::Exit)
+        {
+            EndDrawing();
+        }
     }
 }

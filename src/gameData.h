@@ -19,6 +19,7 @@ namespace Globals
 	extern const int minObstacleHeight;
 	extern const int maxObstacleHeight;
 	 
+	extern Texture2D menuBackground;
 	extern Texture2D backParallax;
 	extern Texture2D middleParallax;
 	extern Texture2D frontParallax;
@@ -39,6 +40,11 @@ namespace Globals
 	extern Texture2D pause;
 	extern Texture2D idlePlayer;
 	extern Texture2D jumpingPlayer;
+
+	extern int menuBackgroundWidth;
+	extern int menuBackgroundHeight;
+	extern Rectangle menuSource;
+	extern Rectangle menuDest;
 	 
 	extern bool newScene;
 	extern bool multiPlayer;

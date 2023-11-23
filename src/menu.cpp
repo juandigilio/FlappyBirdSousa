@@ -1,5 +1,9 @@
 #include "menu.h"
 
+#include <iostream>
+
+
+
 static int height = 100;
 static int width = 200;
 static int playY = 300;
@@ -7,18 +11,20 @@ static int multiY = 400;
 static int creditsY = 500;
 static int exitY = 600;
 
+using namespace std;
 using namespace Globals;
 
 static void drawMenu()
 {
 	middleButtons = screenWidth / 2 - width / 4;
 
-	staticParallaxDraw();
-
+	/*staticParallaxDraw();
 	DrawTexture(playUnselectedButton, middleButtons, playY, WHITE);
 	DrawTexture(playUnselectedButton, middleButtons, multiY, WHITE);
 	DrawTexture(creditsUnselectedButton, middleButtons, creditsY, WHITE);
-	DrawTexture(exitUnselectedButton, middleButtons, exitY, WHITE);
+	DrawTexture(exitUnselectedButton, middleButtons, exitY, WHITE);*/
+
+	DrawTexturePro(menuBackground, menuSource, menuDest, { 0, 0 }, 0.0f, RAYWHITE);
 
 	DrawText("Version: 0.3", 20, 20, 30, WHITE);
 }
@@ -27,25 +33,24 @@ static void checkMenuInput(GameSceen& actualSceen)
 {
 	Vector2 posMouse = GetMousePosition();
 
-	if (GetMouseX() >= middleButtons
-		&& GetMouseX() <= middleButtons + width / 2
-		&& GetMouseY() >= playY
-		&& GetMouseY() <= playY + height / 2)
+	Rectangle sinlgePlayer =  {163.0f, 200.0f, 54.0f, 268.0f};
+	Rectangle multiPlayeRec =  {452.0f, 215.0f, 54.0f, 268.0f};
+	Rectangle credits =  {934.0f, 215.0f, 54.0f, 268.0f};
+	Rectangle exit =  {1193.0f, 212.0f, 54.0f, 268.0f};
+
+
+	if (CheckCollisionPointRec(GetMousePosition(), sinlgePlayer))
 	{
-		DrawTexture(playSelectedButton, middleButtons, playY, WHITE);
+		menuSource.x = static_cast<float>(menuBackgroundWidth);
 
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
 			actualSceen = GameSceen::Game;
 		}
 	}
-
-	if (GetMouseX() >= middleButtons
-		&& GetMouseX() <= middleButtons + width / 2
-		&& GetMouseY() >= multiY
-		&& GetMouseY() <= multiY + height / 2)
+	else if (CheckCollisionPointRec(GetMousePosition(), multiPlayeRec))
 	{
-		DrawTexture(playSelectedButton, middleButtons, multiY, WHITE);
+		menuSource.x = static_cast<float>(menuBackgroundWidth) * 2.0f;
 
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
@@ -53,32 +58,31 @@ static void checkMenuInput(GameSceen& actualSceen)
 			actualSceen = GameSceen::Game;
 		}
 	}
-	
-	if (GetMouseX() >= middleButtons
-		&& GetMouseX() <= middleButtons + width / 2
-		&& GetMouseY() >= creditsY
-		&& GetMouseY() <= creditsY + height / 2)
+	else if (CheckCollisionPointRec(GetMousePosition(), credits))
 	{
-		DrawTexture(creditsSelectedButton, middleButtons, creditsY, WHITE);
+		menuSource.x = static_cast<float>(menuBackgroundWidth) * 3.0f;
 
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
 			actualSceen = GameSceen::Credits;
 		}
 	}
-
-	if (GetMouseX() >= middleButtons
-		&& GetMouseX() <= middleButtons + width / 2
-		&& GetMouseY() >= exitY
-		&& GetMouseY() <= exitY + height / 2)
+	else if (CheckCollisionPointRec(GetMousePosition(), exit))
 	{
-		DrawTexture(exitSelectedButton, middleButtons, exitY, WHITE);
+		menuSource.x = static_cast<float>(menuBackgroundWidth) * 4.0f;
 
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
 			actualSceen = GameSceen::Exit;
 		}
 	}
+	else
+	{
+		menuSource.x = 0.0f;
+	}
+
+	cout << "X: " << GetMouseX() << endl;
+	cout << "Y: " << GetMouseY() << endl;
 }
 
 void showMenu(GameSceen& actualSceen)

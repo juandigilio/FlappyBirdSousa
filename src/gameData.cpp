@@ -8,6 +8,7 @@ namespace Globals
 	extern const int minObstacleHeight = 100;
 	extern const int maxObstacleHeight = 500;
 
+	extern Texture2D menuBackground{};
 	extern Texture2D backParallax{};
 	extern Texture2D middleParallax{};
 	extern Texture2D frontParallax{};
@@ -28,6 +29,11 @@ namespace Globals
 	extern Texture2D pause{};
 	extern Texture2D idlePlayer{};
 	extern Texture2D jumpingPlayer{};
+
+	extern int menuBackgroundWidth = screenWidth;
+	extern int menuBackgroundHeight = screenHeight;
+	extern Rectangle menuSource = { 0.0f, 0.0f, static_cast<float>(menuBackgroundWidth) , static_cast<float>(menuBackgroundHeight) };
+	extern Rectangle menuDest = {0.0f, 0.0f, static_cast<float>(menuBackgroundWidth) , static_cast<float>(menuBackgroundHeight) };
 
 	extern bool newScene = true;
 	extern bool multiPlayer = false;
