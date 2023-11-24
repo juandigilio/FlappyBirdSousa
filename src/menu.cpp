@@ -18,21 +18,13 @@ static void drawMenu()
 {
 	middleButtons = screenWidth / 2 - width / 4;
 
-	/*staticParallaxDraw();
-	DrawTexture(playUnselectedButton, middleButtons, playY, WHITE);
-	DrawTexture(playUnselectedButton, middleButtons, multiY, WHITE);
-	DrawTexture(creditsUnselectedButton, middleButtons, creditsY, WHITE);
-	DrawTexture(exitUnselectedButton, middleButtons, exitY, WHITE);*/
-
 	DrawTexturePro(menuBackground, menuSource, menuDest, { 0, 0 }, 0.0f, RAYWHITE);
 
 	DrawText("Version: 0.3", 20, 20, 30, WHITE);
 }
 
-static void checkMenuInput(GameSceen& actualSceen)
+static void checkMenuInput()
 {
-	Vector2 posMouse = GetMousePosition();
-
 	Rectangle sinlgePlayer =  {163.0f, 200.0f, 54.0f, 268.0f};
 	Rectangle multiPlayeRec =  {452.0f, 215.0f, 54.0f, 268.0f};
 	Rectangle credits =  {934.0f, 215.0f, 54.0f, 268.0f};
@@ -80,12 +72,9 @@ static void checkMenuInput(GameSceen& actualSceen)
 	{
 		menuSource.x = 0.0f;
 	}
-
-	cout << "X: " << GetMouseX() << endl;
-	cout << "Y: " << GetMouseY() << endl;
 }
 
-void showMenu(GameSceen& actualSceen)
+void showMenu()
 {
 	if (!firstTime)
 	{
@@ -94,5 +83,5 @@ void showMenu(GameSceen& actualSceen)
 
 	drawMenu();
 
-	checkMenuInput(actualSceen);
+	checkMenuInput();
 }

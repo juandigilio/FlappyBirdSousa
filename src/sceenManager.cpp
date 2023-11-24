@@ -15,26 +15,19 @@ using namespace Globals;
 static void loadAssets()
 {
     menuBackground = LoadTexture("assets/menuBackground.png");
+    creditsBackground = LoadTexture("assets/creditsBackground.png");
     backParallax = LoadTexture("assets/backParallax.png");
     middleParallax = LoadTexture("assets/middleParallax.png");
     frontParallax = LoadTexture("assets/frontParallax.png");
-    menuUnselectedButton = LoadTexture("assets/menuUnselectedButton.png");
-    menuSelectedButton = LoadTexture("assets/menuSelectedButton.png");
-    playUnselectedButton = LoadTexture("assets/playUnselectedButton.png");
-    playSelectedButton = LoadTexture("assets/playSelectedButton.png");
-    creditsUnselectedButton = LoadTexture("assets/creditsUnselectedButton.png");
-    creditsSelectedButton = LoadTexture("assets/creditsSelectedButton.png");
-    exitUnselectedButton = LoadTexture("assets/exitUnselectedButton.png");
-    exitSelectedButton = LoadTexture("assets/exitSelectedButton.png");
-    creditsParallaxUnselectedButton = LoadTexture("assets/parallaxUnselectedButton.png");
-    creditsParallaxSelectedButton = LoadTexture("assets/parallaxSelectedButton.png");
-    creditsNachoUnselectedButton = LoadTexture("assets/creditsUnselectedNacho.png");
-    creditsNachoSelectedButton = LoadTexture("assets/creditsSelectedNacho.png");
-    resumeUnselectedButton = LoadTexture("assets/resumeUnselectedButton.png");
-    resumeSelectedButton = LoadTexture("assets/resumeSelectedButton.png");
-    pause = LoadTexture("assets/pause.png");
+    resume = LoadTexture("assets/resume.png");
+    menu = LoadTexture("assets/menu.png");
+    resumeSelected = LoadTexture("assets/resumeSelected.png");
+    menuSelected = LoadTexture("assets/menuSelected.png");
     idlePlayer = LoadTexture("assets/gamePlay/ass.png");
     jumpingPlayer = LoadTexture("assets/gamePlay/assSprite.png");
+
+    resumePos = {screenWidth - 150.0f, 15.0f, 60.0f, 60.0f };
+    menuPos = {screenWidth - 75.0f, 15.0f, 60.0f, 60.0f };
 }
 
 void runGame()
@@ -47,10 +40,8 @@ void runGame()
     Player player2;
     Obstacles topObstacles;
     Obstacles bottomObstacles;
-   
-    GameSceen actualScene = GameSceen::Menu;
 
-    InitWindow(screenWidth, screenHeight, "Flappy Bird");
+    InitWindow(screenWidth, screenHeight, "Farty Butt");
 
     InitAudioDevice();    
 
@@ -60,16 +51,16 @@ void runGame()
 
     setObstacles(topObstacles, bottomObstacles);
 
-    while (!WindowShouldClose() && !exitProgram)
+    while (!exitProgram)
     {
         BeginDrawing();
         ClearBackground(BLACK);
 
-        switch (actualScene)
+        switch (actualSceen)
         {
             case GameSceen::Menu:
             {
-                showMenu(actualScene);
+                showMenu();
                 break;
             }          
             case GameSceen::Game:
@@ -79,22 +70,24 @@ void runGame()
             }
             case GameSceen::Pause:
             {
-
+                showPause(player, topObstacles, bottomObstacles);
                 break;
             }
             case GameSceen::Credits:
             {
-                showCredits(actualScene);
+                showCredits();
                 break;
             }
             case GameSceen::Exit:
             {
+                EndDrawing();
                 CloseWindow();
+                exitProgram = true;
                 break;
             }
         }
 
-        if (actualScene != GameSceen::Exit)
+        if (actualSceen != GameSceen::Exit)
         {
             EndDrawing();
         }

@@ -4,4 +4,4 @@
 #include "gameData.h"
 #include "parallax.h"
 
-void showMenu(GameSceen& actualSceen);
+void showMenu();

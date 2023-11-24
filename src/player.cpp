@@ -90,6 +90,11 @@ void getPlayerInput(Player& player, Player& player2)
             player2.lastFrame = GetTime();
         }
     }
+
+    if (IsKeyPressed(KEY_ESCAPE))
+    {
+        actualSceen = GameSceen::Pause;
+    }
 }
 
 static void movePlayer(Player& player)

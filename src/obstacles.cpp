@@ -50,9 +50,6 @@ void updateObtacles(Obstacles& topObstacles, Obstacles& bottomObstacles)
 
 void drawObstacles(Obstacles& topObstacles, Obstacles& bottomObstacles)
 {
-	//DrawRectangle(static_cast<int>(topObstacles.pos.x), static_cast<int>(topObstacles.pos.y), topObstacles.width, topObstacles.height, GREEN);
-	//DrawRectangle(static_cast<int>(bottomObstacles.pos.x), static_cast<int>(bottomObstacles.pos.y), bottomObstacles.width, bottomObstacles.height, GREEN);
-	DrawTexture(pause, screenWidth / 2 - 200, 738, WHITE);
 	DrawTexture(topObstacles.texture, static_cast<int>(topObstacles.pos.x), static_cast<int>(topObstacles.pos.y), WHITE);
 	DrawTexture(bottomObstacles.texture, static_cast<int>(bottomObstacles.pos.x), static_cast<int>(bottomObstacles.pos.y), WHITE);
 }

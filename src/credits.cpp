@@ -1,5 +1,9 @@
 #include "credits.h"
 
+#include <iostream>
+
+
+using namespace std;
 using namespace Globals;
 
 static int xCredits = screenWidth / 2 - 200;
@@ -7,54 +11,59 @@ static int yCredits = 400;
 static int parallaxCreditsY = 300;
 
 static void drawCredits()
-{	
-	staticParallaxDraw();
-
-	DrawTexture(creditsNachoUnselectedButton, xCredits, yCredits, WHITE);
-
-	DrawTexture(creditsParallaxUnselectedButton, middleButtons, parallaxCreditsY, WHITE);
+{
+	DrawTexturePro(creditsBackground, menuSource, menuDest, { 0, 0 }, 0.0f, RAYWHITE);
 }
 
-static void getCreditsInput(GameSceen& actualSceen)
+static void getCreditsInput()
 {
-	int height = 100;
-	int width = 200;
+	Vector2 sousa1 = { 350, 452 };
+	Vector2 sousa2 = { 281, 555 };
+	Vector2 sousa3 = { 422, 557 };
 
-	if (GetMouseX() >= xCredits
-		&& GetMouseX() <= xCredits + 394
-		&& GetMouseY() >= yCredits
-		&& GetMouseY() <= yCredits + 28)
+	Vector2 digilio1 = { 950, 455 };
+	Vector2 digilio2 = { 890, 556 };
+	Vector2 digilio3 = { 1030, 554 };
+
+
+
+	if (CheckCollisionPointTriangle(GetMousePosition(), digilio1, digilio2, digilio3))
 	{
-		DrawTexture(creditsNachoSelectedButton, xCredits, yCredits, WHITE);
+		menuSource.x = static_cast<float>(menuBackgroundWidth);
 
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
+			OpenURL("https://github.com/juandigilio");
 			OpenURL("https://juandigilio.itch.io/");
 		}
 	}
-
-	if (GetMouseX() >= middleButtons
-		&& GetMouseX() <= middleButtons + width / 2
-		&& GetMouseY() >= parallaxCreditsY
-		&& GetMouseY() <= parallaxCreditsY + height / 2)
+	else if (CheckCollisionPointTriangle(GetMousePosition(), sousa1, sousa2, sousa3))
 	{
-		DrawTexture(creditsParallaxSelectedButton, middleButtons, parallaxCreditsY, WHITE);
+		menuSource.x = static_cast<float>(menuBackgroundWidth) * 2.0f;
 
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
-			OpenURL("https://es.vecteezy.com/vectores-gratis/parallax");
+			OpenURL("https://github.com/nachosou");
+			OpenURL("https://nachosou.itch.io/");
 		}
+	}
+	else
+	{
+		menuSource.x = 0;
 	}
 
 	if (IsKeyPressed(KEY_ESCAPE))
 	{
 		actualSceen = GameSceen::Menu;
 	}
+
+	cout << "X: " << GetMouseX() << endl;
+	cout << "Y: " << GetMouseY() << endl;
 }
 
-void showCredits(GameSceen& actualSceen)
+void showCredits()
 {
 	drawCredits();
 
-	getCreditsInput(actualSceen);
+	getCreditsInput();
 }

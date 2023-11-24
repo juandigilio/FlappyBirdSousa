@@ -1,5 +1,7 @@
 #pragma once
 
 #include "gameData.h"
+#include "player.h"
+#include "obstacles.h"
 
-void showPause(GameSceen& actualScene);
+void showPause(Player player, Obstacles top, Obstacles bottom);
