@@ -1,6 +1,8 @@
 #pragma once
 #include "raylib/raylib.h"
 
+const int obstaclesQnty = 2;
+
 struct Obstacles
 {
 	Texture2D texture;
@@ -13,6 +15,6 @@ struct Obstacles
 	int sepparation = 200;
 };
 
-void setObstacles(Obstacles& topObstacles, Obstacles& bottomObstacles);
-void updateObtacles(Obstacles& topObstacle, Obstacles& bottomObstacles);
-void drawObstacles(Obstacles& topObstacles, Obstacles& bottomObstacles);
+void setObstacles(Obstacles topObstacles[], Obstacles bottomObstacles[]);
+void updateObtacles(Obstacles topObstacle[], Obstacles bottomObstacles[]);
+void drawObstacles(Obstacles topObstacles[], Obstacles bottomObstacles[]);

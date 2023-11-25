@@ -28,5 +28,5 @@ struct Player
 
 void setPlayer(Player& player, Player& player2);
 void getPlayerInput(Player& player, Player& player2);
-void updatePlayer(Player& player, Player& player2, Obstacles& topObstacles, Obstacles& bottomObstacles);
+void updatePlayer(Player& player, Player& player2, Obstacles topObstacles[], Obstacles bottomObstacles[]);
 void drawPlayer(Player& player);

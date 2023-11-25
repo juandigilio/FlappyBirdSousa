@@ -4,4 +4,4 @@
 #include "player.h"
 #include "obstacles.h"
 
-void showPause(Player player, Obstacles top, Obstacles bottom);
+void showPause(Player player, Obstacles topObstacles[], Obstacles bottomObstacles[]);

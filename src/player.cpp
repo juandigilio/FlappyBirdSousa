@@ -116,43 +116,49 @@ static bool checkCollision(Player player, Obstacles obstacles)
     return false;
 }
 
-void updatePlayer(Player& player, Player& player2,Obstacles& topObstacles, Obstacles& bottomObstacles)
+void updatePlayer(Player& player, Player& player2, Obstacles topObstacles[], Obstacles bottomObstacles[])
 {
     movePlayer(player);
 
-    if (checkCollision(player, topObstacles) || checkCollision(player, bottomObstacles))
+    for (int i = 0; i < obstaclesQnty; i++)
     {
-        player.isColliding = true;
-    }
-    else
-    {
-        if (player.pos.y > screenHeight)
+        if (checkCollision(player, topObstacles[i]) || checkCollision(player, bottomObstacles[i]))
         {
             player.isColliding = true;
         }
+        else
+        {
+            if (player.pos.y > screenHeight)
+            {
+                player.isColliding = true;
+            }
+        }
     }
+   
 
     if (multiPlayer)
     {
         movePlayer(player2);
 
-        if (checkCollision(player2, topObstacles) || checkCollision(player2, bottomObstacles))
+        for (int i = 0; i < obstaclesQnty; i++)
         {
-            player2.isColliding = true;
-        }
-        else
-        {
-            if (player2.pos.y > screenHeight)
+            if (checkCollision(player2, topObstacles[i]) || checkCollision(player2, bottomObstacles[i]))
             {
                 player2.isColliding = true;
             }
-        }
+            else
+            {
+                if (player2.pos.y > screenHeight)
+                {
+                    player2.isColliding = true;
+                }
+            }
+        }  
     }
 }
 
 void drawPlayer(Player& player)
 {
-    //DrawTexture(player.texture, static_cast<int>(player.pos.x), static_cast<int>(player.pos.y), WHITE);
     Vector2 origin = { static_cast<float>(player.textureIddle.width / 2), static_cast<float>(player.textureIddle.height / 2) };
     
     float jumpingTextureWidth = 93.0f;

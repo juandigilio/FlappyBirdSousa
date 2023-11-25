@@ -10,6 +10,8 @@
 #include "player.h"
 #include "obstacles.h"
 
+
+
 using namespace Globals;
 
 static void loadAssets()
@@ -25,9 +27,6 @@ static void loadAssets()
     menuSelected = LoadTexture("assets/menuSelected.png");
     idlePlayer = LoadTexture("assets/gamePlay/ass.png");
     jumpingPlayer = LoadTexture("assets/gamePlay/assSprite.png");
-
-    resumePos = {screenWidth - 150.0f, 15.0f, 60.0f, 60.0f };
-    menuPos = {screenWidth - 75.0f, 15.0f, 60.0f, 60.0f };
 }
 
 void runGame()
@@ -38,8 +37,8 @@ void runGame()
 
     Player player;
     Player player2;
-    Obstacles topObstacles;
-    Obstacles bottomObstacles;
+    Obstacles topObstacles[obstaclesQnty];
+    Obstacles bottomObstacles[obstaclesQnty];
 
     InitWindow(screenWidth, screenHeight, "Farty Butt");
 

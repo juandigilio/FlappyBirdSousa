@@ -20,8 +20,8 @@ namespace Globals
 	extern Texture2D idlePlayer{};
 	extern Texture2D jumpingPlayer{};
 
-	extern Rectangle resumePos{};
-	extern Rectangle menuPos{};
+	extern Rectangle resumePos = {screenWidth - 150.0f, 15.0f, 60.0f, 60.0f };
+	extern Rectangle menuPos = {screenWidth - 75.0f, 15.0f, 60.0f, 60.0f };
 
 	extern int menuBackgroundWidth = screenWidth;
 	extern int menuBackgroundHeight = screenHeight;

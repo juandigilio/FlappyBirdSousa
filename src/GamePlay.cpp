@@ -7,7 +7,7 @@
 
 using namespace Globals;
 
-static void resetStats(Player& player, Player& player2, Obstacles& topObstacles, Obstacles& bottomObstacles)
+static void resetStats(Player& player, Player& player2, Obstacles topObstacles[], Obstacles bottomObstacles[])
 {
 	setPlayer(player, player2);
 
@@ -19,7 +19,7 @@ static void getInput(Player& player, Player& player2)
 	getPlayerInput(player, player2);
 }
 
-static void updateGame(Player& player, Player& player2, Obstacles& topObstacles, Obstacles& bottomObstacles)
+static void updateGame(Player& player, Player& player2, Obstacles topObstacles[], Obstacles bottomObstacles[])
 {
 	updateParallax();
 
@@ -35,7 +35,7 @@ static void updateGame(Player& player, Player& player2, Obstacles& topObstacles,
 	}
 }
 
-static void drawGame(Player& player, Player& player2, Obstacles& topObstacles, Obstacles& bottomObstacles)
+static void drawGame(Player& player, Player& player2, Obstacles topObstacles[], Obstacles bottomObstacles[])
 {
 	drawParallax();
 
@@ -49,7 +49,7 @@ static void drawGame(Player& player, Player& player2, Obstacles& topObstacles, O
 	drawObstacles(topObstacles, bottomObstacles);
 }
 
-void gameLoop(Player& player, Player& player2, Obstacles& topObstacles, Obstacles& bottomObstacles)
+void gameLoop(Player& player, Player& player2, Obstacles topObstacles[], Obstacles bottomObstacles[])
 {
 	if (firstTime)
 	{
