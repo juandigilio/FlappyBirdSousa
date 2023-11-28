@@ -20,6 +20,14 @@ namespace Globals
 	extern Texture2D idlePlayer{};
 	extern Texture2D jumpingPlayer{};
 
+	extern Sound jump1{};
+	extern Sound creditsSound{};
+	extern Sound dead{};
+	extern Sound menuSelectedSound{};
+	extern Sound menuUnselectedSound{};
+	extern Sound shoot{};
+	extern Sound win{};
+
 	extern Rectangle resumePos = {screenWidth - 150.0f, 15.0f, 60.0f, 60.0f };
 	extern Rectangle menuPos = {screenWidth - 75.0f, 15.0f, 60.0f, 60.0f };
 
@@ -33,14 +41,14 @@ namespace Globals
 	extern bool multiPlayer = false;
 	extern bool exitProgram = false;
 	extern bool isGamePaused = false;
+	extern bool firstTime = true;
+	extern bool isClicking = false;
 
 	extern float scrollingBack = 0.0f;
 	extern float scrollingMid = 0.0f;
 	extern float scrollingFore = 0.0f;
 
 	extern int middleButtons{};
-
-	extern bool firstTime = true;
 
 	extern GameSceen actualSceen = GameSceen::Menu;
 }

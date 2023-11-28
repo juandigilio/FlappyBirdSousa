@@ -68,6 +68,8 @@ void getPlayerInput(Player& player, Player& player2)
         player.isJumping = true;
         player.frame = 0;
         player.lastFrame = GetTime();
+
+        PlaySound(jump1);
 	}
 
     if (multiPlayer)
@@ -88,11 +90,14 @@ void getPlayerInput(Player& player, Player& player2)
             player2.isJumping = true;
             player2.frame = 0;
             player2.lastFrame = GetTime();
+
+            PlaySound(jump1);
         }
     }
 
     if (IsKeyPressed(KEY_ESCAPE))
     {
+        PlaySound(menuUnselectedSound);
         actualSceen = GameSceen::Pause;
     }
 }
@@ -226,4 +231,12 @@ void drawPlayer(Player& player)
        
         DrawTexturePro(player.textureIddle, player.source, dest, origin, 0.0f, RAYWHITE);
     }
+}
+
+void unloadPlayers(Player& player1, Player& player2)
+{
+    UnloadTexture(player1.textureIddle);
+    UnloadTexture(player1.textureJumping);
+    UnloadTexture(player2.textureIddle);
+    UnloadTexture(player2.textureJumping);
 }

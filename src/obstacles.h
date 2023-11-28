@@ -18,3 +18,4 @@ struct Obstacles
 void setObstacles(Obstacles topObstacles[], Obstacles bottomObstacles[]);
 void updateObtacles(Obstacles topObstacle[], Obstacles bottomObstacles[]);
 void drawObstacles(Obstacles topObstacles[], Obstacles bottomObstacles[]);
+void unloadObstacles(Obstacles topObstacles[], Obstacles bottomObstacles[]);

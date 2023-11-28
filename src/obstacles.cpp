@@ -5,7 +5,6 @@
 using namespace Globals;
 
 
-
 void setObstacles(Obstacles topObstacles[], Obstacles bottomObstacles[])
 {
 	for (int i = 0; i < obstaclesQnty; i++)
@@ -66,6 +65,17 @@ void drawObstacles(Obstacles topObstacles[], Obstacles bottomObstacles[])
 	{
 		DrawTexture(topObstacles[i].texture, static_cast<int>(topObstacles[i].pos.x), static_cast<int>(topObstacles[i].pos.y), WHITE);
 		DrawTexture(bottomObstacles[i].texture, static_cast<int>(bottomObstacles[i].pos.x), static_cast<int>(bottomObstacles[i].pos.y), WHITE);
+	}
+}
+
+void unloadObstacles(Obstacles topObstacles[], Obstacles bottomObstacles[])
+{
+	for (int i = 0; i < obstaclesQnty; i++)
+	{
+		UnloadTexture(topObstacles[i].texture);
+		UnloadTexture(topObstacles[i].shitedTexture);
+		UnloadTexture(bottomObstacles[i].texture);
+		UnloadTexture(bottomObstacles[i].shitedTexture);
 	}
 }
 

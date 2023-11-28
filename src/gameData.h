@@ -30,6 +30,14 @@ namespace Globals
 	extern Texture2D menuSelected;
 	extern Texture2D idlePlayer;
 	extern Texture2D jumpingPlayer;
+	
+	extern Sound jump1;
+	extern Sound creditsSound;
+	extern Sound dead;
+	extern Sound menuSelectedSound;
+	extern Sound menuUnselectedSound;
+	extern Sound shoot;
+	extern Sound win;
 
 	extern Rectangle resumePos;
 	extern Rectangle menuPos;
@@ -43,14 +51,16 @@ namespace Globals
 	extern bool multiPlayer;
 	extern bool exitProgram;
 	extern bool isGamePaused;
-	 
+	extern bool firstTime;
+	extern bool isClicking;
+
 	extern float scrollingBack;
 	extern float scrollingMid;
 	extern float scrollingFore;
 	 
 	extern int middleButtons;
 
-	extern bool firstTime;
+
 
 	extern GameSceen actualSceen;
 }

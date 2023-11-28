@@ -35,8 +35,16 @@ static void checkMenuInput()
 	{
 		menuSource.x = static_cast<float>(menuBackgroundWidth);
 
+		if (!isClicking)
+		{
+			isClicking = true;
+
+			PlaySound(menuUnselectedSound);
+		}
+
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
+			PlaySound(menuSelectedSound);
 			actualSceen = GameSceen::Game;
 		}
 	}
@@ -44,8 +52,16 @@ static void checkMenuInput()
 	{
 		menuSource.x = static_cast<float>(menuBackgroundWidth) * 2.0f;
 
+		if (!isClicking)
+		{
+			isClicking = true;
+
+			PlaySound(menuUnselectedSound);
+		}
+
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
+			PlaySound(menuSelectedSound);
 			multiPlayer = true;
 			actualSceen = GameSceen::Game;
 		}
@@ -54,8 +70,16 @@ static void checkMenuInput()
 	{
 		menuSource.x = static_cast<float>(menuBackgroundWidth) * 3.0f;
 
+		if (!isClicking)
+		{
+			isClicking = true;
+
+			PlaySound(menuUnselectedSound);
+		}
+
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
+			PlaySound(menuSelectedSound);
 			actualSceen = GameSceen::Credits;
 		}
 	}
@@ -63,13 +87,22 @@ static void checkMenuInput()
 	{
 		menuSource.x = static_cast<float>(menuBackgroundWidth) * 4.0f;
 
+		if (!isClicking)
+		{
+			isClicking = true;
+
+			PlaySound(menuUnselectedSound);
+		}
+
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
+			PlaySound(menuSelectedSound);
 			actualSceen = GameSceen::Exit;
 		}
 	}
 	else
 	{
+		isClicking = false;
 		menuSource.x = 0.0f;
 	}
 }

@@ -30,3 +30,4 @@ void setPlayer(Player& player, Player& player2);
 void getPlayerInput(Player& player, Player& player2);
 void updatePlayer(Player& player, Player& player2, Obstacles topObstacles[], Obstacles bottomObstacles[]);
 void drawPlayer(Player& player);
+void unloadPlayers(Player& player1, Player& player2);
