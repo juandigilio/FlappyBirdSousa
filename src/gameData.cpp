@@ -8,6 +8,9 @@ namespace Globals
 	extern const int minObstacleHeight = 100;
 	extern const int maxObstacleHeight = 500;
 
+	extern int highScore = 0;
+	extern double speedometer = 0;
+
 	extern Texture2D menuBackground{};
 	extern Texture2D creditsBackground{};
 	extern Texture2D backParallax{};
@@ -17,8 +20,6 @@ namespace Globals
 	extern Texture2D menu{};
 	extern Texture2D resumeSelected{};
 	extern Texture2D menuSelected{};
-	extern Texture2D idlePlayer{};
-	extern Texture2D jumpingPlayer{};
 
 	extern Sound jump1{};
 	extern Sound creditsSound{};
@@ -27,6 +28,9 @@ namespace Globals
 	extern Sound menuUnselectedSound{};
 	extern Sound shoot{};
 	extern Sound win{};
+
+	extern Font font{};
+	extern float fontSize{};
 
 	extern Rectangle resumePos = {screenWidth - 150.0f, 15.0f, 60.0f, 60.0f };
 	extern Rectangle menuPos = {screenWidth - 75.0f, 15.0f, 60.0f, 60.0f };

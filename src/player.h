@@ -5,12 +5,13 @@
 struct Player
 {
 	Vector2 pos;
-	int speed;
-	int width;
-	int height;
 	Vector2 velocity;
+	int speed;
 	float gravity;
 	float jumpForce;
+	int width;
+	int height;
+	int totalPoints;
 	Texture2D textureIddle;
 	Texture2D textureJumping;
 	int frame;

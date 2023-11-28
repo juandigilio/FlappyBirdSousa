@@ -21,16 +21,17 @@ void setPlayer(Player& player, Player& player2)
     player.isColliding = false;
     player.isJumping = false;
     player.frame = 0;
+    player.totalPoints = 0;
 
     if (firstTime)
     {
-        player.textureIddle = LoadTexture("assets/gamePlay/ass.png");
-        player.textureJumping = LoadTexture("assets/gamePlay/assSprite.png");
+        player.textureIddle = LoadTexture("Assets/GamePlay/ass.png");
+        player.textureJumping = LoadTexture("Assets/GamePlay/assSprite.png");
     }
    
     if (multiPlayer)
     {
-        player2.pos.x = 100;
+        player2.pos.x = 200;
         player2.pos.y = static_cast<float>(screenHeight / 2);
         player2.speed = 400;
         player2.width = 60;
@@ -44,8 +45,8 @@ void setPlayer(Player& player, Player& player2)
 
         if (firstTime)
         {
-            player2.textureIddle = LoadTexture("assets/gamePlay/ass2.png");
-            player2.textureJumping = LoadTexture("assets/gamePlay/assSprite2.png");
+            player2.textureIddle = LoadTexture("Assets/GamePlay/ass2.png");
+            player2.textureJumping = LoadTexture("Assets/GamePlay/assSprite2.png");
         }
     }
 }
@@ -130,14 +131,33 @@ void updatePlayer(Player& player, Player& player2, Obstacles topObstacles[], Obs
         if (checkCollision(player, topObstacles[i]) || checkCollision(player, bottomObstacles[i]))
         {
             player.isColliding = true;
+
+            if (player.totalPoints > highScore)
+            {
+                highScore = player.totalPoints;
+            }
         }
         else
         {
             if (player.pos.y > screenHeight)
             {
                 player.isColliding = true;
+
+                if (player.totalPoints > highScore)
+                {
+                    highScore = player.totalPoints;
+                }
             }
         }
+    }
+
+    double elapsedTime = GetTime() - speedometer;
+
+    if (elapsedTime > 0.4f)
+    {
+        player.totalPoints++;
+
+        speedometer = GetTime();
     }
    
 

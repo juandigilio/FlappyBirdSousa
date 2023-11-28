@@ -11,10 +11,10 @@ void setObstacles(Obstacles topObstacles[], Obstacles bottomObstacles[])
 	{
 		if (firstTime)
 		{
-			topObstacles[i].texture = LoadTexture("assets/gamePlay/urinal.png");
-			topObstacles[i].shitedTexture = LoadTexture("assets/gamePlay/shitedUrinal.png");
-			bottomObstacles[i].texture = LoadTexture("assets/gamePlay/bottomUrinal.png");
-			bottomObstacles[i].shitedTexture = LoadTexture("assets/gamePlay/bottomShitedUrinal.png");
+			topObstacles[i].texture = LoadTexture("Assets/GamePlay/urinal.png");
+			topObstacles[i].shitedTexture = LoadTexture("Assets/GamePlay/shitedUrinal.png");
+			bottomObstacles[i].texture = LoadTexture("Assets/GamePlay/bottomUrinal.png");
+			bottomObstacles[i].shitedTexture = LoadTexture("Assets/GamePlay/bottomShitedUrinal.png");
 		}
 
 		topObstacles[i].pos.x = static_cast<float>(screenWidth + (i * 683));

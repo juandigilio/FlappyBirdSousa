@@ -19,6 +19,9 @@ namespace Globals
 	extern const int minObstacleHeight;
 	extern const int maxObstacleHeight;
 	 
+	extern int highScore;
+	extern double speedometer;
+
 	extern Texture2D menuBackground;
 	extern Texture2D creditsBackground;
 	extern Texture2D backParallax;
@@ -28,8 +31,6 @@ namespace Globals
 	extern Texture2D menu;
 	extern Texture2D resumeSelected;
 	extern Texture2D menuSelected;
-	extern Texture2D idlePlayer;
-	extern Texture2D jumpingPlayer;
 	
 	extern Sound jump1;
 	extern Sound creditsSound;
@@ -38,6 +39,9 @@ namespace Globals
 	extern Sound menuUnselectedSound;
 	extern Sound shoot;
 	extern Sound win;
+
+	extern Font font;
+	extern float fontSize;
 
 	extern Rectangle resumePos;
 	extern Rectangle menuPos;

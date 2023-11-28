@@ -22,6 +22,7 @@
     <ClCompile Include="src\credits.cpp" />
     <ClCompile Include="src\gameData.cpp" />
     <ClCompile Include="src\gamePlay.cpp" />
+    <ClCompile Include="src\hud.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\menu.cpp" />
     <ClCompile Include="src\obstacles.cpp" />
@@ -34,6 +35,7 @@
     <ClInclude Include="src\credits.h" />
     <ClInclude Include="src\gameData.h" />
     <ClInclude Include="src\gamePlay.h" />
+    <ClInclude Include="src\hud.h" />
     <ClInclude Include="src\menu.h" />
     <ClInclude Include="src\obstacles.h" />
     <ClInclude Include="src\parallax.h" />

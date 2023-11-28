@@ -16,25 +16,26 @@ using namespace Globals;
 
 static void loadAssets()
 {
-	menuBackground = LoadTexture("assets/menuBackground.png");
-	creditsBackground = LoadTexture("assets/creditsBackground.png");
-	backParallax = LoadTexture("assets/backParallax.png");
-	middleParallax = LoadTexture("assets/middleParallax.png");
-	frontParallax = LoadTexture("assets/frontParallax.png");
-	resume = LoadTexture("assets/resume.png");
-	menu = LoadTexture("assets/menu.png");
-	resumeSelected = LoadTexture("assets/resumeSelected.png");
-	menuSelected = LoadTexture("assets/menuSelected.png");
-	idlePlayer = LoadTexture("assets/gamePlay/ass.png");
-	jumpingPlayer = LoadTexture("assets/gamePlay/assSprite.png");
+	menuBackground = LoadTexture("Assets/menuBackground.png");
+	creditsBackground = LoadTexture("Assets/creditsBackground.png");
+	backParallax = LoadTexture("Assets/backParallax.png");
+	middleParallax = LoadTexture("Assets/middleParallax.png");
+	frontParallax = LoadTexture("Assets/frontParallax.png");
+	resume = LoadTexture("Assets/resume.png");
+	menu = LoadTexture("Assets/menu.png");
+	resumeSelected = LoadTexture("Assets/resumeSelected.png");
+	menuSelected = LoadTexture("Assets/menuSelected.png");
 
-	jump1 = LoadSound("assets/Sounds/jump1.wav");
-	creditsSound = LoadSound("assets/Sounds/credits.wav");
-	dead = LoadSound("assets/Sounds/dead.wav");
-	menuUnselectedSound = LoadSound("assets/Sounds/menuSelected.wav");
-	menuSelectedSound = LoadSound("assets/Sounds/menuUnselected.wav");
-	shoot = LoadSound("assets/Sounds/shoot.wav");
-	win = LoadSound("assets/Sounds/win.wav");
+	jump1 = LoadSound("Assets/Sounds/jump1.wav");
+	creditsSound = LoadSound("Assets/Sounds/credits.wav");
+	dead = LoadSound("Assets/Sounds/dead.wav");
+	menuUnselectedSound = LoadSound("Assets/Sounds/menuSelected.wav");
+	menuSelectedSound = LoadSound("Assets/Sounds/menuUnselected.wav");
+	shoot = LoadSound("Assets/Sounds/shoot.wav");
+	win = LoadSound("Assets/Sounds/win.wav");
+
+	font = LoadFont("Assets/Fonts/dpcomic.ttf");
+	fontSize = font.baseSize * 2.0f;
 }
 
 static void unloadAssets(Player& player1, Player& player2, Obstacles topObstacles[], Obstacles bottomObstacles[])
@@ -48,8 +49,6 @@ static void unloadAssets(Player& player1, Player& player2, Obstacles topObstacle
 	UnloadTexture(menu);
 	UnloadTexture(resumeSelected);
 	UnloadTexture(menuSelected);
-	UnloadTexture(idlePlayer);
-	UnloadTexture(jumpingPlayer);
 
 	unloadPlayers(player1, player2);
 

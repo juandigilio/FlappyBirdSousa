@@ -4,6 +4,8 @@
 
 #include"gameData.h"
 #include "parallax.h"
+#include "hud.h"
+
 
 using namespace Globals;
 
@@ -47,6 +49,8 @@ static void drawGame(Player& player, Player& player2, Obstacles topObstacles[], 
 	}
 
 	drawObstacles(topObstacles, bottomObstacles);
+
+	drawHud(player);
 }
 
 void gameLoop(Player& player, Player& player2, Obstacles topObstacles[], Obstacles bottomObstacles[])
