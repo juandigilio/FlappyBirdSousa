@@ -24,6 +24,7 @@ static void getPausedInput()
 		
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
+			StopMusicStream(gameMusic);
 			actualSceen = GameSceen::Menu;
 		}
 	}

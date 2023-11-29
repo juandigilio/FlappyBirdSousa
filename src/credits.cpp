@@ -31,8 +31,17 @@ static void getCreditsInput()
 	{
 		menuSource.x = static_cast<float>(menuBackgroundWidth);
 
+		if (!isClicking)
+		{
+			isClicking = true;
+
+			PlaySound(creditsSound);
+		}
+
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
+			PlaySound(menuSelectedSound);
+
 			OpenURL("https://github.com/juandigilio");
 			OpenURL("https://juandigilio.itch.io/");
 		}
@@ -41,8 +50,17 @@ static void getCreditsInput()
 	{
 		menuSource.x = static_cast<float>(menuBackgroundWidth) * 2.0f;
 
+		if (!isClicking)
+		{
+			isClicking = true;
+
+			PlaySound(creditsSound);
+		}
+
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
+			PlaySound(menuSelectedSound);
+
 			OpenURL("https://github.com/nachosou");
 			OpenURL("https://nachosou.itch.io/");
 		}
@@ -50,10 +68,12 @@ static void getCreditsInput()
 	else
 	{
 		menuSource.x = 0;
+		isClicking = false;
 	}
 
 	if (IsKeyPressed(KEY_ESCAPE))
 	{
+		StopMusicStream(creditsMusic);
 		actualSceen = GameSceen::Menu;
 	}
 
@@ -66,4 +86,6 @@ void showCredits()
 	drawCredits();
 
 	getCreditsInput();
+
+	UpdateMusicStream(creditsMusic);
 }

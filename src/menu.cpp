@@ -19,8 +19,11 @@ static void drawMenu()
 	middleButtons = screenWidth / 2 - width / 4;
 
 	DrawTexturePro(menuBackground, menuSource, menuDest, { 0, 0 }, 0.0f, RAYWHITE);
+	
+	Vector2 position{ 20, screenHeight - fontSize * 0.5f };
+	float spacing = 1.0f;
 
-	DrawText("Version: 0.3", 20, 20, 30, WHITE);
+	DrawTextEx(font, "Version 0.9", position, fontSize * 0.4f, spacing, BLACK);
 }
 
 static void checkMenuInput()
@@ -46,6 +49,7 @@ static void checkMenuInput()
 		{
 			PlaySound(menuSelectedSound);
 			actualSceen = GameSceen::Game;
+			PlayMusicStream(gameMusic);
 		}
 	}
 	else if (CheckCollisionPointRec(GetMousePosition(), multiPlayeRec))
@@ -64,6 +68,7 @@ static void checkMenuInput()
 			PlaySound(menuSelectedSound);
 			multiPlayer = true;
 			actualSceen = GameSceen::Game;
+			PlayMusicStream(gameMusic);
 		}
 	}
 	else if (CheckCollisionPointRec(GetMousePosition(), credits))
@@ -81,6 +86,7 @@ static void checkMenuInput()
 		{
 			PlaySound(menuSelectedSound);
 			actualSceen = GameSceen::Credits;
+			PlayMusicStream(creditsMusic);
 		}
 	}
 	else if (CheckCollisionPointRec(GetMousePosition(), exit))

@@ -9,6 +9,7 @@ namespace Globals
 	extern const int maxObstacleHeight = 500;
 
 	extern int highScore = 0;
+	extern int acelerator = 0;
 	extern double speedometer = 0;
 
 	extern Texture2D menuBackground{};
@@ -27,7 +28,9 @@ namespace Globals
 	extern Sound menuSelectedSound{};
 	extern Sound menuUnselectedSound{};
 	extern Sound shoot{};
-	extern Sound win{};
+	
+	extern Music creditsMusic{};
+	extern Music gameMusic{};
 
 	extern Font font{};
 	extern float fontSize{};

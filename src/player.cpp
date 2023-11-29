@@ -22,6 +22,8 @@ void setPlayer(Player& player, Player& player2)
     player.isJumping = false;
     player.frame = 0;
     player.totalPoints = 0;
+    player.rotation = 0.0f;
+    player.lastCollide = 0.0f;
 
     if (firstTime)
     {
@@ -132,6 +134,8 @@ void updatePlayer(Player& player, Player& player2, Obstacles topObstacles[], Obs
         {
             player.isColliding = true;
 
+            PlaySound(dead);
+
             if (player.totalPoints > highScore)
             {
                 highScore = player.totalPoints;
@@ -142,6 +146,8 @@ void updatePlayer(Player& player, Player& player2, Obstacles topObstacles[], Obs
             if (player.pos.y > screenHeight)
             {
                 player.isColliding = true;
+
+                PlaySound(dead);
 
                 if (player.totalPoints > highScore)
                 {
@@ -158,8 +164,18 @@ void updatePlayer(Player& player, Player& player2, Obstacles topObstacles[], Obs
         player.totalPoints++;
 
         speedometer = GetTime();
+
+        if (player.totalPoints - acelerator >= 20)
+        {
+            acelerator += 20;
+
+            for (int i = 0; i < obstaclesQnty; i++)
+            {
+                topObstacles[i].speed += 40;
+                bottomObstacles[i].speed += 40;
+            }
+        }
     }
-   
 
     if (multiPlayer)
     {
@@ -250,6 +266,21 @@ void drawPlayer(Player& player)
         player.source = { 0, 0, static_cast<float>(player.textureIddle.width), static_cast<float>(player.textureIddle.height) };
        
         DrawTexturePro(player.textureIddle, player.source, dest, origin, 0.0f, RAYWHITE);
+    }
+}
+
+void ShowCrash(Player& player)
+{
+    player.rotation += 0.6f;
+
+    if (player.rotation >= 360.0f)
+    {
+        player.rotation = 0.0f;
+    }
+
+    if (GetTime() - player.lastCollide > 2.0f)
+    {
+        player.isColliding = false;
     }
 }
 

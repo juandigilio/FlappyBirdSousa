@@ -20,6 +20,7 @@ namespace Globals
 	extern const int maxObstacleHeight;
 	 
 	extern int highScore;
+	extern int acelerator;
 	extern double speedometer;
 
 	extern Texture2D menuBackground;
@@ -38,7 +39,9 @@ namespace Globals
 	extern Sound menuSelectedSound;
 	extern Sound menuUnselectedSound;
 	extern Sound shoot;
-	extern Sound win;
+
+	extern Music creditsMusic;
+	extern Music gameMusic;
 
 	extern Font font;
 	extern float fontSize;
@@ -63,8 +66,6 @@ namespace Globals
 	extern float scrollingFore;
 	 
 	extern int middleButtons;
-
-
 
 	extern GameSceen actualSceen;
 }

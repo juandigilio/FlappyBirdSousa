@@ -32,7 +32,15 @@ static void loadAssets()
 	menuUnselectedSound = LoadSound("Assets/Sounds/menuSelected.wav");
 	menuSelectedSound = LoadSound("Assets/Sounds/menuUnselected.wav");
 	shoot = LoadSound("Assets/Sounds/shoot.wav");
-	win = LoadSound("Assets/Sounds/win.wav");
+
+	creditsMusic = LoadMusicStream("Assets/Sounds/creditsMusic.wav");
+	creditsMusic.looping = true;
+
+	gameMusic = LoadMusicStream("Assets/Sounds/gamePlayMusic.wav");
+	gameMusic.looping = true;
+
+	SetSoundVolume(menuUnselectedSound, 0.5f);
+	SetMusicVolume(gameMusic, 0.3f);
 
 	font = LoadFont("Assets/Fonts/dpcomic.ttf");
 	fontSize = font.baseSize * 2.0f;
@@ -53,6 +61,17 @@ static void unloadAssets(Player& player1, Player& player2, Obstacles topObstacle
 	unloadPlayers(player1, player2);
 
 	unloadObstacles(topObstacles, bottomObstacles);
+
+	UnloadSound(jump1);
+	UnloadSound(creditsSound);
+	UnloadSound(dead);
+	UnloadSound(menuUnselectedSound);
+	UnloadSound(menuSelectedSound);
+	UnloadSound(shoot);
+	UnloadMusicStream(creditsMusic);
+	UnloadMusicStream(gameMusic);
+
+	UnloadFont(font);
 }
 
 void runGame()

@@ -23,11 +23,15 @@ static void getInput(Player& player, Player& player2)
 
 static void updateGame(Player& player, Player& player2, Obstacles topObstacles[], Obstacles bottomObstacles[])
 {
-	updateParallax();
+	if (!player.isColliding && !player2.isColliding)
+	{
+		updateParallax();
 
-	updatePlayer(player, player2, topObstacles, bottomObstacles);
+		updatePlayer(player, player2, topObstacles, bottomObstacles);
 
-	updateObtacles(topObstacles, bottomObstacles);
+		updateObtacles(topObstacles, bottomObstacles);
+	}
+	
 
 	if (player.isColliding || player2.isColliding)
 	{
@@ -67,4 +71,6 @@ void gameLoop(Player& player, Player& player2, Obstacles topObstacles[], Obstacl
 	updateGame(player, player2, topObstacles, bottomObstacles);
 
 	drawGame(player, player2, topObstacles, bottomObstacles);
+
+	UpdateMusicStream(gameMusic);
 }

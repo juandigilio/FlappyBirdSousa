@@ -11,6 +11,7 @@ struct Player
 	float jumpForce;
 	int width;
 	int height;
+	float rotation;
 	int totalPoints;
 	Texture2D textureIddle;
 	Texture2D textureJumping;
@@ -18,6 +19,7 @@ struct Player
 	double lastFrame;
 	bool isJumping;
 	bool isColliding;
+	float lastCollide;
 
 	Rectangle source;
 
@@ -31,4 +33,5 @@ void setPlayer(Player& player, Player& player2);
 void getPlayerInput(Player& player, Player& player2);
 void updatePlayer(Player& player, Player& player2, Obstacles topObstacles[], Obstacles bottomObstacles[]);
 void drawPlayer(Player& player);
+void ShowCrash(Player& player);
 void unloadPlayers(Player& player1, Player& player2);
