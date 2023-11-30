@@ -44,6 +44,8 @@ void setPlayer(Player& player, Player& player2)
         player2.isColliding = false;
         player2.isJumping = false;
         player2.frame = 0;
+        player2.rotation = 0.0f;
+        player2.lastCollide = 0.0f;
 
         if (firstTime)
         {
@@ -111,10 +113,10 @@ static void movePlayer(Player& player)
     player.pos.y += player.velocity.y * GetFrameTime();
 }
 
-static bool checkCollision(Player player, Obstacles obstacles)
+static bool checkCollision(Player& player, Obstacles obstacles)
 {
-    if (player.pos.x + player.textureIddle.width >= obstacles.pos.x &&
-        player.pos.x <= obstacles.pos.x + obstacles.texture.width &&
+    if (player.pos.x + player.textureIddle.width >= obstacles.pos.x + 20.0f &&
+        player.pos.x <= obstacles.pos.x + obstacles.texture.width - 20.0f &&
         player.pos.y + player.textureIddle.height >= obstacles.pos.y &&
         player.pos.y <= obstacles.pos.y + obstacles.texture.height) 
     {
@@ -132,9 +134,20 @@ void updatePlayer(Player& player, Player& player2, Obstacles topObstacles[], Obs
     {
         if (checkCollision(player, topObstacles[i]) || checkCollision(player, bottomObstacles[i]))
         {
+            player.lastCollide = static_cast<float>(GetTime());
+            player2.lastCollide = static_cast<float>(GetTime());
             player.isColliding = true;
 
             PlaySound(dead);
+
+            if (checkCollision(player, topObstacles[i]))
+            {
+                topObstacles[i].isShited = true;
+            }
+            else
+            {
+                bottomObstacles[i].isShited = true;
+            }
 
             if (player.totalPoints > highScore)
             {
@@ -145,6 +158,8 @@ void updatePlayer(Player& player, Player& player2, Obstacles topObstacles[], Obs
         {
             if (player.pos.y > screenHeight)
             {
+                player.lastCollide = static_cast<float>(GetTime());
+                player2.lastCollide = static_cast<float>(GetTime());
                 player.isColliding = true;
 
                 PlaySound(dead);
@@ -185,12 +200,29 @@ void updatePlayer(Player& player, Player& player2, Obstacles topObstacles[], Obs
         {
             if (checkCollision(player2, topObstacles[i]) || checkCollision(player2, bottomObstacles[i]))
             {
+                PlaySound(dead);
+
+                if (checkCollision(player2, topObstacles[i]))
+                {
+                    topObstacles[i].isShited = true;
+                }
+                else
+                {
+                    bottomObstacles[i].isShited = true;
+                }
+
+                player.lastCollide = static_cast<float>(GetTime());
+                player2.lastCollide = static_cast<float>(GetTime());
                 player2.isColliding = true;
             }
             else
             {
                 if (player2.pos.y > screenHeight)
                 {
+                    PlaySound(dead);
+
+                    player.lastCollide = static_cast<float>(GetTime());
+                    player2.lastCollide = static_cast<float>(GetTime());
                     player2.isColliding = true;
                 }
             }
@@ -265,22 +297,39 @@ void drawPlayer(Player& player)
 
         player.source = { 0, 0, static_cast<float>(player.textureIddle.width), static_cast<float>(player.textureIddle.height) };
        
-        DrawTexturePro(player.textureIddle, player.source, dest, origin, 0.0f, RAYWHITE);
+        DrawTexturePro(player.textureIddle, player.source, dest, origin, player.rotation, RAYWHITE);
     }
 }
 
-void ShowCrash(Player& player)
+void ShowCrash(Player& player, Player& player2, bool& animationFinished)
 {
-    player.rotation += 0.6f;
-
+    if (player.isColliding)
+    {
+        player.rotation += 0.6f;
+    }
     if (player.rotation >= 360.0f)
     {
         player.rotation = 0.0f;
     }
-
     if (GetTime() - player.lastCollide > 2.0f)
     {
         player.isColliding = false;
+        animationFinished = true;
+    }
+
+
+    if (player2.isColliding)
+    {
+        player2.rotation += 0.6f;
+    }
+    if (player2.rotation >= 360.0f)
+    {
+        player2.rotation = 0.0f;
+    }
+    if (GetTime() - player2.lastCollide > 2.0f)
+    {
+        player2.isColliding = false;
+        animationFinished = true;
     }
 }
 

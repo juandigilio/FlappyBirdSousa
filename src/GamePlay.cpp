@@ -6,6 +6,10 @@
 #include "parallax.h"
 #include "hud.h"
 
+#include <iostream>
+
+using namespace std;
+
 
 using namespace Globals;
 
@@ -23,6 +27,8 @@ static void getInput(Player& player, Player& player2)
 
 static void updateGame(Player& player, Player& player2, Obstacles topObstacles[], Obstacles bottomObstacles[])
 {
+	bool animationFinished = false;
+
 	if (!player.isColliding && !player2.isColliding)
 	{
 		updateParallax();
@@ -31,13 +37,17 @@ static void updateGame(Player& player, Player& player2, Obstacles topObstacles[]
 
 		updateObtacles(topObstacles, bottomObstacles);
 	}
-	
+	else
+	{
+		ShowCrash(player, player2, animationFinished);
+	}
 
-	if (player.isColliding || player2.isColliding)
+	if (animationFinished)
 	{
 		resetStats(player, player2, topObstacles, bottomObstacles);
 		player.isColliding = false;
 		player2.isColliding = false;
+		animationFinished = false;
 	}
 }
 

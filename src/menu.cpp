@@ -23,7 +23,7 @@ static void drawMenu()
 	Vector2 position{ 20, screenHeight - fontSize * 0.5f };
 	float spacing = 1.0f;
 
-	DrawTextEx(font, "Version 0.9", position, fontSize * 0.4f, spacing, BLACK);
+	DrawTextEx(font, "Version 1.0", position, fontSize * 0.4f, spacing, BLACK);
 }
 
 static void checkMenuInput()

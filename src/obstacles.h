@@ -13,6 +13,7 @@ struct Obstacles
 	int width = 0;
 	float coolDown = 0;
 	int sepparation = 200;
+	bool isShited;
 };
 
 void setObstacles(Obstacles topObstacles[], Obstacles bottomObstacles[]);

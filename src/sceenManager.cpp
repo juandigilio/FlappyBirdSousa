@@ -114,7 +114,7 @@ void runGame()
 			}
 			case GameSceen::Pause:
 			{
-				showPause(player1, topObstacles, bottomObstacles);
+				showPause(player1, player2, topObstacles, bottomObstacles);
 				break;
 			}
 			case GameSceen::Credits:

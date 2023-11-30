@@ -5,11 +5,12 @@
 
 using namespace Globals;
 
-static void drawPause(Player player, Obstacles topObstacles[], Obstacles bottomObstacles[])
+static void drawPause(Player player, Player player2, Obstacles topObstacles[], Obstacles bottomObstacles[])
 {
 	staticParallaxDraw();
 
 	drawPlayer(player);
+	drawPlayer(player2);
 	drawObstacles(topObstacles, bottomObstacles);
 	DrawTexture(resume, static_cast<int>(resumePos.x), static_cast<int>(resumePos.y), WHITE);
 	DrawTexture(menu, static_cast<int>(menuPos.x), static_cast<int>(menuPos.y), WHITE);
@@ -44,9 +45,9 @@ static void getPausedInput()
 	}
 }
 
-void showPause(Player player, Obstacles topObstacles[], Obstacles bottomObstacles[])
+void showPause(Player player, Player player2, Obstacles topObstacles[], Obstacles bottomObstacles[])
 {
-	drawPause(player, topObstacles, bottomObstacles);
+	drawPause(player, player2, topObstacles, bottomObstacles);
 
 	getPausedInput();
 }
